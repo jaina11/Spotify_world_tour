@@ -16,7 +16,7 @@ export const SCENES = [
     description:
       "You've played 847 Hindi/Gujarati tracks this year — Navratri season just lit up the genre you already love.",
     surfacedReason:
-      "You've been deep in Gujarati music for months — and now Navratri just kicked off back home. These are the tracks everyone's dancing to right now, plus a few hidden ones picked just for your taste. Your playlist is about to hit different this season.",
+      "Navratri just started back home — and with 847 Gujarati tracks this year, your playlist already knows the vibe. Here's what Gujarat is dancing to right now.",
     heroEmoji: "🪔",
     imageUrl: "/images/navratri-hero.jpg",
     heroImageUrl: "/images/navratri-hero.jpg",
@@ -32,7 +32,7 @@ export const SCENES = [
     description:
       "You added 3 Afrobeats songs without realizing it was a pattern. Lagos is having a moment.",
     surfacedReason:
-      "You probably didn't notice, but you've been quietly adding Afrobeats to your library all month. Lagos's street-pop scene is exploding right now — and your taste is already leaning in. Here's your front-row seat to what's blowing up before everyone catches on.",
+      "You've been quietly adding Afrobeats all month without noticing. Lagos noticed. Here's your way into the wave before everyone else.",
     heroEmoji: "🌍",
     imageUrl:
       "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400&h=200&fit=crop",
@@ -50,7 +50,7 @@ export const SCENES = [
     description:
       "City pop is surging again, overlapping with the J-pop you streamed in March.",
     surfacedReason:
-      "You're living in Japan and you've already got J-pop in your rotation — but city pop is having a massive revival right now. Think of it as the sound your J-pop playlist has been building toward without you realizing.",
+      "You're in Japan, you stream J-pop — but city pop is having a moment right now. This is the sound your playlist's been building toward.",
     heroEmoji: "🌃",
     imageUrl:
       "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&h=200&fit=crop",
@@ -65,7 +65,8 @@ export const SCENES = [
     statusColor: "#7B68EE",
     description:
       "Rio's biggest celebration is approaching — a low-effort way to start exploring.",
-    surfacedReason: null,
+    surfacedReason:
+      "Rio's carnival is 2 months out. Your Daylist has been leaning Latin — this is a low-effort way to start exploring.",
     heroEmoji: "🎭",
     imageUrl:
       "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400&h=200&fit=crop",
@@ -81,7 +82,7 @@ export const SCENES = [
     description:
       "Beyond the K-pop you already stream — what's charting in Seoul this week.",
     surfacedReason:
-      "You already know mainstream K-pop, but Seoul's underground is having a moment right now. These are the artists and sounds the K-pop you love grew out of — your next obsession might be in here.",
+      "You know K-pop. But Seoul's underground scene is breaking out right now — and these are the roots your favorites grew from.",
     heroEmoji: "🎤",
     imageUrl:
       "https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=400&h=200&fit=crop",
@@ -96,7 +97,8 @@ export const SCENES = [
     statusColor: "#1DB954",
     description:
       "The Olympics hype faded, but the French sound it surfaced didn't.",
-    surfacedReason: null,
+    surfacedReason:
+      "The Olympics put French music on your radar briefly. The hype faded — but the sound stuck around.",
     heroEmoji: "💃",
     imageUrl:
       "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&h=200&fit=crop",
@@ -111,7 +113,8 @@ export const SCENES = [
     statusColor: "#F0A030",
     description:
       "Your Daylist leaned Latin twice this month — this is what's fueling that sound.",
-    surfacedReason: null,
+    surfacedReason:
+      "Your Daylist leaned Latin twice this month. Something's pulling you that direction — here's what's fueling it.",
     heroEmoji: "☀️",
     imageUrl:
       "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=400&h=200&fit=crop",
@@ -126,7 +129,8 @@ export const SCENES = [
     statusColor: "#1DB954",
     description:
       "Beyond the K-pop you stream, Busan's underground hip-hop scene just broke out.",
-    surfacedReason: null,
+    surfacedReason:
+      "You stream K-pop from Seoul — but Busan's underground hip-hop just broke out. Same country, completely different sound.",
     heroEmoji: "🎧",
     imageUrl:
       "https://images.unsplash.com/photo-1548115184-bc6544d06a58?w=400&h=200&fit=crop",
@@ -141,7 +145,8 @@ export const SCENES = [
     statusColor: "#E8593C",
     description:
       "While Gujarat dances Garba, Maharashtra's own festival sound is having its moment.",
-    surfacedReason: null,
+    surfacedReason:
+      "While you're deep in Gujarati music, Maharashtra next door is having its own festival moment right now.",
     heroEmoji: "🪘",
     imageUrl:
       "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=200&fit=crop",

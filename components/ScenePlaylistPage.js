@@ -57,7 +57,7 @@ export default function ScenePlaylistPage({
       </div>
 
       <div className="px-4">
-        <AIInsightCard label="Your story with this scene" className="mb-4">
+        <AIInsightCard label="Your story here" className="mb-4">
           {scene.surfacedReason}
         </AIInsightCard>
 
