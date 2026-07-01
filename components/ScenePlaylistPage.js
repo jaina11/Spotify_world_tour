@@ -1,7 +1,7 @@
-import Link from "next/link";
 import AIInsightCard from "@/components/AIInsightCard";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import MobileLayout from "@/components/MobileLayout";
+import StickyPageHeader from "@/components/StickyPageHeader";
 import TrackRow from "@/components/TrackRow";
 import { USER_PROFILE } from "@/data/scenes";
 
@@ -17,6 +17,8 @@ export default function ScenePlaylistPage({
 
   return (
     <MobileLayout activeTab="home">
+      <StickyPageHeader title={scene.name} backHref="/hub" />
+
       <div className="relative -mx-4">
         <div className="relative h-[200px] w-full overflow-hidden">
           <ImageWithFallback
@@ -33,23 +35,7 @@ export default function ScenePlaylistPage({
                 "linear-gradient(to bottom, transparent 0%, #121212 100%)",
             }}
           />
-          <div className="absolute inset-x-0 top-0 flex items-center justify-between px-4 pt-14">
-            <Link
-              href="/hub"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-lg text-white backdrop-blur-sm"
-              aria-label="Back"
-            >
-              ←
-            </Link>
-            <button
-              type="button"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-lg text-white backdrop-blur-sm"
-              aria-label="Share"
-            >
-              ↗
-            </button>
-          </div>
-          <div className="absolute inset-x-0 bottom-0 px-4 pb-4">
+          <div className="absolute inset-x-0 bottom-0 px-4 pb-4 pt-14">
             {statusBadge ? (
               <span className="mb-2 inline-block rounded bg-spotify-green px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-black">
                 {statusBadge}

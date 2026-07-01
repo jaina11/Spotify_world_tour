@@ -1,5 +1,5 @@
 export const USER_PROFILE = {
-  name: "Jayna",
+  name: "Jimmy",
   totalTracks: 847,
   countries: 6,
   languages: 5,

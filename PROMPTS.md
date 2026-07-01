@@ -77,7 +77,7 @@ Use MobileLayout with TabBar activeTab="search". Reference the first screenshot 
 
 Create data/scenes.js with ALL the mock data needed for the app. Export these:
 
-1. USER_PROFILE object — name: "Jayna", totalTracks: 847, countries: 6, languages: 5, kmTraveled: 14200
+1. USER_PROFILE object — name: "Jimmy", totalTracks: 847, countries: 6, languages: 5, kmTraveled: 14200
 
 2. SCENES array — all 9 scenes with these fields per scene: id, name, region, status, statusColor, description, surfacedReason (null if none), heroEmoji, navigable (boolean — only "navratri" and "lagos" are true)
 
@@ -198,7 +198,7 @@ Layout (6 sections):
 
 1. Hero card (bg-spotify-surface rounded-2xl p-6 text-center mx-4):
    - "SPOTIFY WORLD TOUR" — white, text-sm, font-extrabold, tracking-[3px]
-   - "Jayna's Passport" — text-spotify-green, text-lg, font-semibold
+   - "Jimmy's Passport" — text-spotify-green, text-lg, font-semibold
    - Stats: 3 columns → "6 Countries" / "5 Languages" / "14.2k km traveled" (big number white, label muted)
    - Tagline: "beyond your everyday English" — italic, text-spotify-muted, text-sm
 

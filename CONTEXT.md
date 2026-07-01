@@ -82,7 +82,7 @@ COMING UP:         #7B68EE (purple)
 ## Mock User Profile
 
 ```
-Name: Jayna
+Name: Jimmy
 Total Hindi/Gujarati tracks played: 847
 Location: Japan
 Top languages: Hindi, Gujarati, Korean, Japanese, Spanish

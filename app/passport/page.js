@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import MobileLayout from "@/components/MobileLayout";
 import PassportJourneyCard from "@/components/PassportJourneyCard";
 import SharePassport from "@/components/SharePassport";
+import StickyPageHeader from "@/components/StickyPageHeader";
 import { PASSPORT_ARTIST_ART, PASSPORT_DISCOVERY_ART } from "@/data/albumArt";
 import { PASSPORT_DATA, SCENES, USER_PROFILE } from "@/data/scenes";
 
@@ -117,6 +117,12 @@ export default function PassportPage() {
 
   return (
     <MobileLayout activeTab="home">
+      <StickyPageHeader
+        title="Music Passport"
+        backHref="/hub"
+        onShare={() => setShowShare(true)}
+      />
+
       <div className="pb-4">
         <section className="relative overflow-hidden">
           <div
@@ -151,28 +157,7 @@ export default function PassportPage() {
             />
           ))}
 
-          <div className="relative z-10 flex items-center justify-between px-4 pt-14 pb-2">
-            <Link
-              href="/hub"
-              className="flex h-10 w-10 items-center justify-center text-xl text-white"
-              aria-label="Back"
-            >
-              ←
-            </Link>
-            <h1 className="absolute left-1/2 -translate-x-1/2 text-base font-semibold text-white">
-              Music Passport
-            </h1>
-            <button
-              type="button"
-              onClick={() => setShowShare(true)}
-              className="flex h-10 w-10 items-center justify-center text-xl text-white"
-              aria-label="Share"
-            >
-              ↗
-            </button>
-          </div>
-
-          <div className="relative z-10 px-4">
+          <div className="relative z-10 px-4 pt-14">
             <p className="mt-6 text-[10px] font-black uppercase tracking-[5px] text-white/70">
               SPOTIFY WORLD TOUR
             </p>
@@ -348,12 +333,27 @@ export default function PassportPage() {
               languages={USER_PROFILE.languages}
             />
           </div>
+        </div>
 
+        <div className="mx-4 mb-6">
           <button
             type="button"
             onClick={() => setShowShare(true)}
-            className="btn-spotify mb-6 w-full rounded-full bg-spotify-green py-4 text-center text-base font-bold text-black shadow-lg shadow-spotify-green/20"
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-spotify-green py-3 text-sm font-bold text-black"
           >
+            <svg
+              className="h-4 w-4 shrink-0 text-black"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M7 17 17 7" />
+              <path d="M9 7h8v8" />
+            </svg>
             Share Your Passport
           </button>
         </div>

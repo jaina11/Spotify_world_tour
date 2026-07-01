@@ -89,32 +89,34 @@ export default function Home() {
           background: "linear-gradient(180deg, #1A1A1A 0%, #121212 100%)",
         }}
       >
-        <div className="flex items-center justify-between pb-3">
-          <div className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-spotify-green text-sm font-bold text-black">
-              J
-            </div>
-            <h1 className="text-xl font-black text-white">Search</h1>
+        <div className="flex items-center gap-3 pb-3">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#333333] text-sm font-bold text-white">
+            J
           </div>
-          <button
-            type="button"
-            className="flex h-10 w-10 items-center justify-center text-lg text-white"
-            aria-label="Camera"
-          >
-            📷
-          </button>
+          <h1 className="text-xl font-black text-white">Search</h1>
         </div>
 
-        <div className="flex h-12 items-center gap-3 rounded-lg bg-white px-4">
-          <span className="text-base text-[#121212]">🔍</span>
-          <span className="text-[13px] text-[#121212]/60">
+        <div className="relative h-12 rounded-lg bg-white">
+          <svg
+            className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#121212"
+            strokeWidth="2"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-3.5-3.5" />
+          </svg>
+          <span className="flex h-full items-center pl-11 text-sm text-[#121212]/60">
             What do you want to listen to?
           </span>
         </div>
       </div>
 
-      <div className="px-4 pt-[148px]">
-        <h2 className="mb-3 text-base font-black text-white">Start browsing</h2>
+      <div className="px-4 pt-[140px]">
+        <h2 className="mb-3 text-base font-bold text-white">Start browsing</h2>
         <div className="mb-5 grid grid-cols-2 gap-2">
           {CATEGORIES.map((category) => (
             <div

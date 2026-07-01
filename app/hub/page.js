@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import MobileLayout from "@/components/MobileLayout";
 import SceneCard from "@/components/SceneCard";
+import StickyPageHeader from "@/components/StickyPageHeader";
 import { ChevronRightIcon, PassportIcon } from "@/components/icons";
 import { SCENES } from "@/data/scenes";
 
@@ -20,6 +23,8 @@ function MusicNote({ className = "" }) {
 export default function HubPage() {
   return (
     <MobileLayout activeTab="home">
+      <StickyPageHeader title="World Tour" backHref="/" />
+
       <div className="relative -mx-4">
         <div
           className="absolute inset-x-0 top-0 h-[200px]"
@@ -28,24 +33,7 @@ export default function HubPage() {
               "linear-gradient(180deg, #2D4A2D 0%, #1A2F1A 30%, #121212 60%, #121212 100%)",
           }}
         />
-        <div className="relative px-4">
-          <div className="flex items-center justify-between pb-3 pt-12">
-            <Link
-              href="/"
-              className="flex h-10 w-10 items-center justify-center text-xl text-white"
-              aria-label="Back"
-            >
-              ←
-            </Link>
-            <button
-              type="button"
-              className="flex h-10 w-10 items-center justify-center text-xl text-white"
-              aria-label="Share"
-            >
-              ↗
-            </button>
-          </div>
-
+        <div className="relative px-4 pt-14">
           <h1 className="text-[26px] font-black leading-tight text-white">
             What&apos;s happening where you&apos;ve been
           </h1>

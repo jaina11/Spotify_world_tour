@@ -249,7 +249,7 @@ Description     ← #B3B3B3, 13px, 2-3 lines
 
 2. **Hero card** (centered, surface background #1A1A1A, rounded 16px, padding 24px):
    - "SPOTIFY WORLD TOUR" — white, 14px, heavy, letter-spacing 3px
-   - "Jayna's Passport" — green (#1DB954), 18px, semibold
+   - "Jimmy's Passport" — green (#1DB954), 18px, semibold
    - Stats row (3 columns):
      - "6" / "Countries"
      - "5" / "Languages"
