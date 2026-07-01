@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sparklePulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 200ms ease forwards;
+}
+
+.sparkle-pulse {
+  animation: sparklePulse 2s ease-in-out infinite;
+}
+
+.tap-scale {
+  transition: transform 150ms ease;
+}
+
+.tap-scale:active {
+  transform: scale(0.98);
+}
+
+.btn-spotify {
+  transition: filter 150ms ease;
+}
+
+.btn-spotify:hover {
+  filter: brightness(1.1);
+}
+
+.hero-emoji-glow-navratri {
+  filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.4));
+}
+
+.hero-emoji-glow-lagos {
+  filter: drop-shadow(0 0 20px rgba(29, 185, 84, 0.4));
+}
+
+.language-bar-fill {
+  background: linear-gradient(90deg, #1aa34a, #1ed760);
+}
+
+@keyframes flightPathFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.flight-path-flow {
+  animation: flightPathFlow 3s linear infinite;
+}
+
+@keyframes markerPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    transform-origin: center;
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    transform-origin: center;
+    opacity: 0.5;
+  }
+}
+
+.marker-pulse {
+  animation: markerPulse 2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
