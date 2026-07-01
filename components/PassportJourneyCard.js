@@ -116,14 +116,11 @@ export default function PassportJourneyCard({ kmTraveled, countries, languages }
       </div>
 
       <div className="relative px-5 pb-5 pt-2 text-center">
-        <p>
-          <span className="text-2xl font-black text-spotify-green">
-            {kmTraveled.toLocaleString()} km
-          </span>
-          <span className="ml-1.5 text-sm text-white/40">of musical distance</span>
+        <p className="text-2xl font-black text-spotify-green">
+          {kmTraveled.toLocaleString()} beats across borders
         </p>
         <p className="mt-1.5 text-[11px] text-white/30">
-          {countries} cultures explored · {languages} languages heard
+          {countries} cultures · {languages} languages · 1 playlist
         </p>
         <p className="mt-1 text-[11px] italic text-white/20">
           From Garba to Afrobeats to City Pop

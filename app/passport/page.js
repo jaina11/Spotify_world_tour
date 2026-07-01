@@ -323,8 +323,8 @@ export default function PassportPage() {
           </div>
 
           <SectionHeader
-            title="How far your ears traveled"
-            subtitle="Your taste went places"
+            title="Where your music took you"
+            subtitle="Your sound crossed borders"
           />
           <div className="mb-6">
             <PassportJourneyCard
