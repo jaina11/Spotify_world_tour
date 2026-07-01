@@ -36,7 +36,7 @@ export default function SceneCard({ scene }) {
         </p>
 
         {scene.surfacedReason && (
-          <AIInsightCard label="AI-powered insight" className="mt-2.5">
+          <AIInsightCard label="Why this is for you" className="mt-2.5">
             {scene.surfacedReason}
           </AIInsightCard>
         )}

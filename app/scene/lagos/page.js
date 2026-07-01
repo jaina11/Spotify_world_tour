@@ -29,7 +29,7 @@ export default function LagosPage() {
       scene={scene}
       sections={SECTIONS}
       statusBadge="RISING · Up 320% this month"
-      heroDescription="Afrobeats is having a moment — the street-pop wave coming out of Lagos right now"
+      heroDescription="Afrobeats is having a moment — the street-pop wave coming out of Lagos right now. Your recent listens say you're already part of it."
       playlistMetadata="32 songs, 1h 45 min · Next update at 9:15 PM"
     />
   );

@@ -16,7 +16,7 @@ export const SCENES = [
     description:
       "You've played 847 Hindi/Gujarati tracks this year — Navratri season just lit up the genre you already love.",
     surfacedReason:
-      "Surfaced for you because: you've streamed 847 Hindi/Gujarati tracks this year, and Navratri started 2 days ago in Gujarat.",
+      "You've been deep in Gujarati music for months — and now Navratri just kicked off back home. These are the tracks everyone's dancing to right now, plus a few hidden ones picked just for your taste. Your playlist is about to hit different this season.",
     heroEmoji: "🪔",
     imageUrl: "/images/navratri-hero.jpg",
     heroImageUrl: "/images/navratri-hero.jpg",
@@ -32,7 +32,7 @@ export const SCENES = [
     description:
       "You added 3 Afrobeats songs without realizing it was a pattern. Lagos is having a moment.",
     surfacedReason:
-      "Surfaced for you because: you added 3 Afrobeats tracks without realizing it was a pattern, and Lagos's street-pop scene is surging globally right now.",
+      "You probably didn't notice, but you've been quietly adding Afrobeats to your library all month. Lagos's street-pop scene is exploding right now — and your taste is already leaning in. Here's your front-row seat to what's blowing up before everyone catches on.",
     heroEmoji: "🌍",
     imageUrl:
       "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400&h=200&fit=crop",
@@ -50,7 +50,7 @@ export const SCENES = [
     description:
       "City pop is surging again, overlapping with the J-pop you streamed in March.",
     surfacedReason:
-      "Surfaced for you because: you're based in Japan and city pop is surging again, overlapping with the J-pop you streamed in March.",
+      "You're living in Japan and you've already got J-pop in your rotation — but city pop is having a massive revival right now. Think of it as the sound your J-pop playlist has been building toward without you realizing.",
     heroEmoji: "🌃",
     imageUrl:
       "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&h=200&fit=crop",
@@ -81,7 +81,7 @@ export const SCENES = [
     description:
       "Beyond the K-pop you already stream — what's charting in Seoul this week.",
     surfacedReason:
-      "Surfaced for you because: you already stream K-pop regularly, and Seoul's indie scene is breaking out beyond the mainstream charts.",
+      "You already know mainstream K-pop, but Seoul's underground is having a moment right now. These are the artists and sounds the K-pop you love grew out of — your next obsession might be in here.",
     heroEmoji: "🎤",
     imageUrl:
       "https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=400&h=200&fit=crop",

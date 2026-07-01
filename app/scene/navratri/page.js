@@ -30,7 +30,7 @@ export default function NavratriPage() {
       scene={scene}
       sections={SECTIONS}
       heroLabel="Spotify · Live now · Started 2 days ago"
-      heroDescription="Nine nights of Garba and Dandiya — the dhol-driven rhythms behind India's biggest festival season"
+      heroDescription="Nine nights of Garba and Dandiya — the dhol-driven rhythms behind India's biggest festival season. And this year, your playlist says you're ready."
       playlistMetadata="48 songs, 2h 22 min · Next update at 7:50 PM"
     />
   );
