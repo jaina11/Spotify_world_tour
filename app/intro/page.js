@@ -40,7 +40,11 @@ export default function IntroPage() {
   const [canShow, setCanShow] = useState(false);
 
   useEffect(() => {
-    if (hasSeenIntro()) {
+    const fromSearch =
+      typeof window !== "undefined" &&
+      new URLSearchParams(window.location.search).get("from") === "search";
+
+    if (hasSeenIntro() && !fromSearch) {
       router.replace("/hub");
       return;
     }

@@ -1,5 +1,4 @@
 import MobileLayout from "@/components/MobileLayout";
-import PassportBanner from "@/components/PassportBanner";
 import StickyPageHeader, {
   HEADER_GRID_COLS,
 } from "@/components/StickyPageHeader";
@@ -40,8 +39,6 @@ export default function TourBucketsPage({
         </div>
         <div aria-hidden="true" />
       </div>
-
-      <PassportBanner className="mb-4 px-4" />
 
       <div className="px-4">
         <div className="mb-1 flex items-center gap-2">

@@ -136,7 +136,7 @@ export default function Home() {
           ))}
         </div>
 
-        <Link href="/hub" className="tap-scale mb-5 block">
+        <Link href="/intro?from=search" className="tap-scale mb-5 block">
           <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-[#0A2F1A] to-[#121212] p-4">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(29,185,84,0.15)_1px,transparent_0)] bg-[length:12px_12px] opacity-40" />
             <WorldMapPattern />

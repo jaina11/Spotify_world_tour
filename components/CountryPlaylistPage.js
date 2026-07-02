@@ -1,7 +1,6 @@
 import AIInsightCard from "@/components/AIInsightCard";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import MobileLayout from "@/components/MobileLayout";
-import PassportBanner from "@/components/PassportBanner";
 import StickyPageHeader from "@/components/StickyPageHeader";
 import TrackRow from "@/components/TrackRow";
 import { USER_PROFILE } from "@/data/scenes";
@@ -17,8 +16,6 @@ export default function CountryPlaylistPage({
   return (
     <MobileLayout activeTab="home">
       <StickyPageHeader title={country.name} backHref={backHref} />
-
-      <PassportBanner className="mb-3 px-4" />
 
       <div className="relative -mx-4">
         <div className="relative h-[200px] w-full overflow-hidden">
