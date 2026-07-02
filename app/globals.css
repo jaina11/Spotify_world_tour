@@ -97,3 +97,96 @@ body {
   transform-box: fill-box;
   transform-origin: center;
 }
+
+@keyframes introFlightPath {
+  from {
+    stroke-dashoffset: 0;
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.65;
+  }
+  to {
+    stroke-dashoffset: -48;
+    opacity: 0.35;
+  }
+}
+
+.intro-flight-path {
+  animation: introFlightPath 7s linear infinite;
+}
+
+.intro-flight-path-delayed {
+  animation-delay: 2s;
+}
+
+.intro-flight-path-slow {
+  animation-delay: 4s;
+  animation-duration: 8s;
+}
+
+@keyframes introPlanePulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+.intro-plane {
+  animation: introPlanePulse 7s ease-in-out infinite;
+}
+
+.intro-plane-2 {
+  animation-delay: 2.3s;
+}
+
+.intro-plane-3 {
+  animation-delay: 4.6s;
+}
+
+@keyframes introIconFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.intro-icon-float {
+  animation: introIconFloat 5s ease-in-out infinite;
+}
+
+@keyframes introGlobeSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.intro-globe-spin {
+  animation: introGlobeSpin 24s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes passportIconPulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    filter: drop-shadow(0 0 0 rgba(29, 185, 84, 0));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px rgba(29, 185, 84, 0.45));
+  }
+}
+
+.passport-icon-pulse {
+  animation: passportIconPulse 3.5s ease-in-out infinite;
+}

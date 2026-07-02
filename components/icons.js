@@ -111,13 +111,50 @@ export function PassportIcon({ className = "h-5 w-5" }) {
   return (
     <svg
       className={className}
-      viewBox="0 0 20 20"
+      viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
     >
-      <rect x="3" y="2" width="14" height="16" rx="2" />
-      <path d="M6 7h8M6 10h8M6 13h5" />
+      <circle cx="12" cy="12" r="9" />
+      <path d="m15.5 8.5-7 3 3 7 7-3-3-7z" />
+    </svg>
+  );
+}
+
+export function TourWaveIcon({ className = "h-10 w-10" }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 40 40"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M6 22c3-6 5-6 8 0s5 6 8 0 5-6 8 0" />
+      <circle cx="20" cy="20" r="14" strokeOpacity="0.35" />
+    </svg>
+  );
+}
+
+export function GlobeIcon({ className = "h-10 w-10" }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 40 40"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      aria-hidden="true"
+    >
+      <circle cx="20" cy="20" r="14" strokeOpacity="0.35" />
+      <ellipse cx="20" cy="20" rx="6" ry="14" />
+      <path d="M6 20h28M8 13h24M8 27h24" strokeOpacity="0.5" />
     </svg>
   );
 }

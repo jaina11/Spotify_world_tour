@@ -370,3 +370,56 @@ export const PASSPORT_DATA = {
     { lang: "Spanish", flag: "🇪🇸", pct: 8 },
   ],
 };
+
+const FLAG_TO_COUNTRY_ID = {
+  "🇮🇳": "india",
+  "🇳🇬": "nigeria",
+  "🇰🇷": "south-korea",
+  "🇯🇵": "japan",
+  "🇧🇷": "brazil",
+  "🇲🇽": "mexico",
+};
+
+function regionToCountryId(region) {
+  const r = region.toLowerCase();
+  if (r.includes("india") || r.includes("gujarat")) return "india";
+  if (r.includes("nigeria") || r.includes("lagos")) return "nigeria";
+  if (r.includes("korea") || r.includes("seoul") || r.includes("busan")) {
+    return "south-korea";
+  }
+  if (r.includes("japan") || r.includes("tokyo")) return "japan";
+  if (r.includes("brazil") || r.includes("rio")) return "brazil";
+  if (r.includes("mexico")) return "mexico";
+  return null;
+}
+
+/**
+ * Single source of truth for /explore exclusion — derived from PASSPORT_DATA
+ * and Your Tour discoveries (not a separate hardcoded list).
+ */
+export function getPassportExploredCountryIds() {
+  const ids = new Set();
+
+  PASSPORT_DATA.worldsSteppedInto.forEach((world) => {
+    const id = regionToCountryId(world.region);
+    if (id) ids.add(id);
+  });
+
+  PASSPORT_DATA.languageBreakdown.forEach((entry) => {
+    const id = FLAG_TO_COUNTRY_ID[entry.flag];
+    if (id) ids.add(id);
+  });
+
+  PASSPORT_DATA.newArtists.forEach((artist) => {
+    const id = FLAG_TO_COUNTRY_ID[artist.flag];
+    // Mexico has passport signals but stays open for explore discovery
+    if (id && id !== "mexico") ids.add(id);
+  });
+
+  PASSPORT_DATA.discoveries.forEach((discovery) => {
+    if (discovery.foundVia.includes("Navratri")) ids.add("india");
+    if (discovery.foundVia.includes("Lagos")) ids.add("nigeria");
+  });
+
+  return Array.from(ids);
+}

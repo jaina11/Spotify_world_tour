@@ -1,31 +1,32 @@
 import AIInsightCard from "@/components/AIInsightCard";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import MobileLayout from "@/components/MobileLayout";
+import PassportBanner from "@/components/PassportBanner";
 import StickyPageHeader from "@/components/StickyPageHeader";
 import TrackRow from "@/components/TrackRow";
 import { USER_PROFILE } from "@/data/scenes";
 
-export default function ScenePlaylistPage({
-  scene,
+export default function CountryPlaylistPage({
+  country,
+  backHref = "/explore",
   sections,
-  heroLabel,
-  heroDescription,
-  statusBadge,
   playlistMetadata,
 }) {
   let trackNumber = 0;
 
   return (
     <MobileLayout activeTab="home">
-      <StickyPageHeader title={scene.name} backHref="/events" />
+      <StickyPageHeader title={country.name} backHref={backHref} />
+
+      <PassportBanner className="mb-3 px-4" />
 
       <div className="relative -mx-4">
         <div className="relative h-[200px] w-full overflow-hidden">
           <ImageWithFallback
-            src={scene.heroImageUrl || scene.imageUrl}
-            alt={scene.name}
+            src={country.heroImageUrl || country.imageUrl}
+            alt={country.name}
             className="h-full w-full object-cover"
-            fallbackGradient={`linear-gradient(135deg, ${scene.statusColor}88, #121212)`}
+            fallbackGradient={country.gradient}
             fallbackClassName="h-full w-full"
           />
           <div
@@ -36,34 +37,28 @@ export default function ScenePlaylistPage({
             }}
           />
           <div className="absolute inset-x-0 bottom-0 px-4 pb-4 pt-14">
-            {statusBadge ? (
+            {country.statusBadge && (
               <span className="mb-2 inline-block rounded bg-spotify-green px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-black">
-                {statusBadge}
+                {country.statusBadge}
               </span>
-            ) : (
-              <p className="mb-1 text-xs text-white/70">{heroLabel}</p>
             )}
             <h1
               className="text-3xl font-black text-white"
               style={{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}
             >
-              {scene.name}
+              {country.flag} {country.name}
             </h1>
             <p className="mt-1 line-clamp-2 text-sm text-white/80">
-              {heroDescription}
+              {country.heroDescription}
             </p>
           </div>
         </div>
       </div>
 
       <div className="px-4">
-        <AIInsightCard label="Your story here" className="mb-4">
-          {scene.surfacedReason}
+        <AIInsightCard label="Why this is for you" className="mb-4">
+          {country.surfacedReason}
         </AIInsightCard>
-
-        <p className="mb-3 line-clamp-2 text-xs leading-relaxed text-spotify-secondary">
-          {scene.description}
-        </p>
 
         <div className="mb-1 flex items-center gap-2">
           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-spotify-green text-xs text-white">
@@ -103,7 +98,7 @@ export default function ScenePlaylistPage({
             <button
               type="button"
               className="btn-spotify flex h-12 w-12 items-center justify-center rounded-full bg-spotify-green text-lg font-bold text-black"
-              aria-label="Play"
+              aria-label="Play all"
             >
               ▶
             </button>
@@ -132,6 +127,7 @@ export default function ScenePlaylistPage({
                   track={track}
                   index={trackNumber}
                   tagColor={track.tagColor}
+                  showPlay
                 />
               );
             })}

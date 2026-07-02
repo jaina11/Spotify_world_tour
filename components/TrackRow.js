@@ -28,7 +28,12 @@ function getTagStyles(track, tagColor) {
   };
 }
 
-export default function TrackRow({ track, tagColor, index }) {
+export default function TrackRow({
+  track,
+  tagColor,
+  index,
+  showPlay = false,
+}) {
   const fallbackGradient =
     FALLBACK_GRADIENTS[track.name] ||
     "radial-gradient(circle at 50% 50%, #444, #222, #111)";
@@ -49,6 +54,11 @@ export default function TrackRow({ track, tagColor, index }) {
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-medium text-white">{track.name}</p>
         <p className="truncate text-xs text-spotify-secondary">{track.artist}</p>
+        {track.whyThis && (
+          <p className="mt-0.5 truncate text-[10px] text-spotify-muted">
+            {track.whyThis}
+          </p>
+        )}
         {track.tag && (
           <p
             className={`mt-1 flex items-center text-[10px] font-medium uppercase tracking-wide ${tagStyles.textClass}`}
@@ -60,9 +70,18 @@ export default function TrackRow({ track, tagColor, index }) {
           </p>
         )}
       </div>
+      {showPlay && (
+        <button
+          type="button"
+          className="btn-spotify flex h-8 w-8 shrink-0 items-center justify-center self-start rounded-full bg-spotify-green text-xs font-bold text-black"
+          aria-label={`Play ${track.name}`}
+        >
+          ▶
+        </button>
+      )}
       <button
         type="button"
-        className="flex h-10 w-8 shrink-0 items-center justify-center self-start text-spotify-secondary opacity-70 transition-opacity [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100"
+        className={`flex h-10 w-8 shrink-0 items-center justify-center self-start text-spotify-secondary opacity-70 transition-opacity ${showPlay ? "" : "[@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100"}`}
         aria-label="More options"
       >
         ⋮
