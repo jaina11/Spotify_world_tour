@@ -190,3 +190,52 @@ body {
 .passport-icon-pulse {
   animation: passportIconPulse 3.5s ease-in-out infinite;
 }
+
+@keyframes passportStamp {
+  0% {
+    transform: scale(1.8) rotate(-12deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(0.95) rotate(3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.passport-stamp {
+  animation: passportStamp 700ms ease-out forwards;
+}
+
+@keyframes trackPlayPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(29, 185, 84, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.45);
+  }
+}
+
+.track-play-pulse {
+  animation: trackPlayPulse 600ms ease-out;
+}
+
+@keyframes reasoningExpand {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 4rem;
+  }
+}
+
+.reasoning-expand {
+  animation: reasoningExpand 250ms ease-out forwards;
+  overflow: hidden;
+}

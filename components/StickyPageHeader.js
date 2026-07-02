@@ -9,6 +9,10 @@ const ICON_SLOT = "flex h-10 w-10 shrink-0 items-center justify-center";
 export const HEADER_GRID_COLS =
   "grid grid-cols-[2.5rem_1fr_2.5rem] items-center gap-x-2";
 
+/** Total height of the fixed page header (status bar + nav row) */
+export const STICKY_HEADER_HEIGHT =
+  "calc(3.5rem + 2.5rem + 0.5rem)";
+
 export default function StickyPageHeader({
   title,
   backHref,

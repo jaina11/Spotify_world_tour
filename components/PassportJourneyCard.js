@@ -1,15 +1,3 @@
-const STOPS = [
-  { flag: "🇮🇳", name: "India", x: 288, y: 92 },
-  { flag: "🇳🇬", name: "Nigeria", x: 192, y: 106 },
-  { flag: "🇰🇷", name: "S.Korea", x: 328, y: 77 },
-  { flag: "🇯🇵", name: "Japan", x: 348, y: 70 },
-  { flag: "🇲🇽", name: "Mexico", x: 88, y: 84 },
-  { flag: "🇧🇷", name: "Brazil", x: 128, y: 158, pulse: true },
-];
-
-const FLIGHT_PATH =
-  "M 288 92 C 248 98 220 102 192 106 C 248 88 290 78 328 77 C 338 74 344 72 348 70 C 280 55 180 62 88 84 C 102 118 115 142 128 158";
-
 function WorldMapLayer() {
   return (
     <>
@@ -42,7 +30,16 @@ function WorldMapLayer() {
   );
 }
 
-export default function PassportJourneyCard({ kmTraveled, countries, languages }) {
+export default function PassportJourneyCard({
+  kmTraveled,
+  countries,
+  languages,
+  stops = [],
+  flightPaths = [],
+  genreSummary = "",
+}) {
+  const hasJourney = stops.length > 1;
+
   return (
     <div
       className="relative overflow-hidden rounded-2xl"
@@ -52,65 +49,76 @@ export default function PassportJourneyCard({ kmTraveled, countries, languages }
       }}
     >
       <div className="relative h-[220px] w-full">
-        <svg
-          viewBox="0 0 400 200"
-          className="absolute inset-0 h-full w-full"
-          aria-label="Musical journey across six countries"
-          preserveAspectRatio="xMidYMid slice"
-        >
-          <WorldMapLayer />
+        {hasJourney ? (
+          <svg
+            viewBox="0 0 400 200"
+            className="absolute inset-0 h-full w-full"
+            aria-label={`Musical journey from Bangalore across ${countries} countries`}
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <WorldMapLayer />
 
-          <path
-            d={FLIGHT_PATH}
-            fill="none"
-            stroke="#1DB954"
-            strokeWidth="1.5"
-            strokeDasharray="6 4"
-            opacity="0.5"
-            className="flight-path-flow"
-          />
+            {flightPaths.map((path, index) => (
+              <path
+                key={`flight-${index}`}
+                d={path}
+                fill="none"
+                stroke="#1DB954"
+                strokeWidth="1.5"
+                strokeDasharray="6 4"
+                opacity="0.5"
+                className="flight-path-flow"
+              />
+            ))}
 
-          {STOPS.map((stop) => (
-            <g key={stop.name}>
-              {stop.pulse && (
+            {stops.map((stop) => (
+              <g key={stop.id}>
+                {stop.isOrigin && (
+                  <circle
+                    cx={stop.x}
+                    cy={stop.y}
+                    r="12"
+                    fill="#1DB954"
+                    opacity="0.2"
+                    className="marker-pulse"
+                  />
+                )}
                 <circle
                   cx={stop.x}
                   cy={stop.y}
-                  r="12"
+                  r="6"
                   fill="#1DB954"
                   opacity="0.2"
-                  className="marker-pulse"
                 />
-              )}
-              <circle
-                cx={stop.x}
-                cy={stop.y}
-                r="6"
-                fill="#1DB954"
-                opacity="0.2"
-              />
-              <circle cx={stop.x} cy={stop.y} r="3" fill="#1DB954" />
-              <text
-                x={stop.x}
-                y={stop.y - 14}
-                textAnchor="middle"
-                fontSize="14"
-              >
-                {stop.flag}
-              </text>
-              <text
-                x={stop.x}
-                y={stop.y + 20}
-                textAnchor="middle"
-                fill="rgba(255,255,255,0.5)"
-                fontSize="8"
-                fontWeight="500"
-              >
-                {stop.name}
-              </text>
-            </g>
-          ))}
-        </svg>
+                <circle cx={stop.x} cy={stop.y} r="3" fill="#1DB954" />
+                <text
+                  x={stop.x}
+                  y={stop.y - 14}
+                  textAnchor="middle"
+                  fontSize="14"
+                >
+                  {stop.flag}
+                </text>
+                <text
+                  x={stop.x}
+                  y={stop.y + 20}
+                  textAnchor="middle"
+                  fill="rgba(255,255,255,0.5)"
+                  fontSize="8"
+                  fontWeight="500"
+                >
+                  {stop.name}
+                </text>
+              </g>
+            ))}
+          </svg>
+        ) : (
+          <div className="flex h-full items-center justify-center px-6 text-center">
+            <p className="text-sm text-white/40">
+              Unlock a country to trace your first route from Bangalore.
+            </p>
+          </div>
+        )}
 
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0A1A2F] to-transparent" />
       </div>
@@ -120,11 +128,12 @@ export default function PassportJourneyCard({ kmTraveled, countries, languages }
           {kmTraveled.toLocaleString()} beats across borders
         </p>
         <p className="mt-1.5 text-[11px] text-white/30">
-          {countries} cultures · {languages} languages · 1 playlist
+          {countries} {countries === 1 ? "culture" : "cultures"} · {languages}{" "}
+          {languages === 1 ? "language" : "languages"} · 1 playlist
         </p>
-        <p className="mt-1 text-[11px] italic text-white/20">
-          From Garba to Afrobeats to City Pop
-        </p>
+        {genreSummary && (
+          <p className="mt-1 text-[11px] italic text-white/20">{genreSummary}</p>
+        )}
       </div>
     </div>
   );

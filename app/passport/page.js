@@ -1,24 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import MobileLayout from "@/components/MobileLayout";
+import PassportCountryStamps from "@/components/PassportCountryStamps";
 import PassportJourneyCard from "@/components/PassportJourneyCard";
 import SharePassport from "@/components/SharePassport";
 import StickyPageHeader from "@/components/StickyPageHeader";
-import { PASSPORT_ARTIST_ART, PASSPORT_DISCOVERY_ART } from "@/data/albumArt";
-import { PASSPORT_DATA, SCENES, USER_PROFILE } from "@/data/scenes";
-
-const SCENE_COLORS = Object.fromEntries(
-  SCENES.map((s) => [s.name, s.statusColor])
-);
-
-const GENRE_DOTS = {
-  Garba: "#FF8C00",
-  Afrobeats: "#1DB954",
-  "City Pop": "#3B82F6",
-  "Bhangra-pop": "#9B59B6",
-};
+import { buildPassportContent } from "@/data/passportContent";
+import { getPassportDisplayStats } from "@/data/passport";
+import { USER_PROFILE } from "@/data/scenes";
 
 const HERO_DOTS = [
   { top: "18%", left: "12%" },
@@ -111,9 +102,42 @@ function LanguageBar({ item }) {
   );
 }
 
+function EmptySection({ message }) {
+  return (
+    <p className="mb-6 rounded-xl border border-dashed border-white/10 px-4 py-6 text-center text-sm text-spotify-secondary">
+      {message}
+    </p>
+  );
+}
+
 export default function PassportPage() {
   const [showShare, setShowShare] = useState(false);
-  const kmDisplay = formatKm(USER_PROFILE.kmTraveled);
+  const [stats, setStats] = useState({
+    countries: 0,
+    languages: 0,
+    kmTraveled: 0,
+    unlocks: [],
+    attempted: [],
+  });
+
+  useEffect(() => {
+    const refreshStats = () => setStats(getPassportDisplayStats());
+    refreshStats();
+    window.addEventListener("focus", refreshStats);
+    window.addEventListener("storage", refreshStats);
+    return () => {
+      window.removeEventListener("focus", refreshStats);
+      window.removeEventListener("storage", refreshStats);
+    };
+  }, []);
+
+  const content = useMemo(
+    () => buildPassportContent(stats.unlocks),
+    [stats.unlocks]
+  );
+
+  const kmDisplay = formatKm(stats.kmTraveled);
+  const hasUnlocks = stats.unlocks.length > 0;
 
   return (
     <MobileLayout activeTab="home">
@@ -174,7 +198,7 @@ export default function PassportPage() {
               <div className="relative flex">
                 <div className="flex-1 border-r border-white/15 py-1 pr-3 text-center">
                   <p className="text-4xl font-black text-white">
-                    {USER_PROFILE.countries}
+                    {stats.countries}
                   </p>
                   <p className="text-[10px] uppercase tracking-wider text-white/50">
                     Countries
@@ -182,7 +206,7 @@ export default function PassportPage() {
                 </div>
                 <div className="flex-1 border-r border-white/15 px-3 py-1 text-center">
                   <p className="text-4xl font-black text-white">
-                    {USER_PROFILE.languages}
+                    {stats.languages}
                   </p>
                   <p className="text-[10px] uppercase tracking-wider text-white/50">
                     Languages
@@ -198,129 +222,160 @@ export default function PassportPage() {
             </div>
 
             <p className="mt-4 mb-8 text-sm italic text-white/40">
-              beyond your everyday English
+              {hasUnlocks
+                ? "beyond your everyday English"
+                : "unlock a country to start collecting stamps"}
             </p>
           </div>
         </section>
 
         <div className="px-4">
           <SectionHeader
-            title="Songs you didn't know you needed"
-            subtitle="Tracks from unfamiliar artists you discovered through World Tour and loved"
+            title="Your country stamps"
+            subtitle="Only destinations you've started exploring appear here"
           />
-          <div className="mb-6 flex gap-3">
-            {PASSPORT_DATA.discoveries.map((discovery) => (
-              <div
-                key={discovery.track}
-                className="min-w-0 flex-1 overflow-hidden rounded-xl"
-              >
-                <div className="relative">
-                  <ImageWithFallback
-                    src={discovery.imageUrl}
-                    alt={discovery.track}
-                    className="h-40 w-full rounded-xl object-cover"
-                    fallbackGradient={PASSPORT_DISCOVERY_ART[discovery.track]}
-                    fallbackClassName="h-40 w-full rounded-xl"
+          <div className="mb-6">
+            <PassportCountryStamps countries={stats.attempted} />
+          </div>
+
+          {hasUnlocks && (
+            <>
+              <SectionHeader
+                title="Songs you didn't know you needed"
+                subtitle="Tracks from unfamiliar artists you discovered through World Tour and loved"
+              />
+              {content.discoveries.length > 0 ? (
+                <div className="mb-6 flex gap-3">
+                  {content.discoveries.map((discovery) => (
+                    <div
+                      key={discovery.id}
+                      className="min-w-0 flex-1 overflow-hidden rounded-xl"
+                    >
+                      <div className="relative">
+                        <ImageWithFallback
+                          src={discovery.imageUrl}
+                          alt={discovery.track}
+                          className="h-40 w-full rounded-xl object-cover"
+                          fallbackGradient="radial-gradient(circle at 50% 50%, #444, #222, #111)"
+                          fallbackClassName="h-40 w-full rounded-xl"
+                        />
+                        <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                        <div className="absolute bottom-2 left-2 right-2">
+                          <span className="inline-block rounded border border-white/30 bg-black/60 px-2 py-1 text-[7px] font-bold uppercase leading-tight tracking-wide text-white backdrop-blur-sm">
+                            Found via {discovery.foundVia}
+                          </span>
+                        </div>
+                      </div>
+                      <p className="mt-2 truncate text-base font-bold text-white">
+                        {discovery.track}
+                      </p>
+                      <p className="truncate text-xs text-spotify-secondary">
+                        {discovery.artist}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <EmptySection message="Play tracks on an unlocked itinerary to surface discoveries here." />
+              )}
+
+              {content.artists.length > 0 && (
+                <>
+                  <SectionHeader
+                    title="Artists who just entered your world"
+                    subtitle="New-to-you artists you've now engaged with"
                   />
-                  <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-2 left-2">
-                    <span className="rounded border border-white/30 bg-black/60 px-2 py-1 text-[8px] font-bold uppercase tracking-wide text-white backdrop-blur-sm">
-                      FOUND VIA {discovery.foundVia.toUpperCase()}
-                    </span>
+                  <div className="mb-6 flex justify-between gap-2">
+                    {content.artists.map((artist) => (
+                      <div
+                        key={artist.id}
+                        className="flex min-w-0 flex-1 flex-col items-center"
+                      >
+                        <ImageWithFallback
+                          src={artist.imageUrl}
+                          alt={artist.name}
+                          className="h-20 w-20 rounded-full object-cover ring-2 ring-spotify-green"
+                          fallbackGradient="radial-gradient(circle at 50% 50%, #444, #222, #111)"
+                          fallbackClassName="h-20 w-20 rounded-full ring-2 ring-spotify-green"
+                        />
+                        <p className="mt-2 truncate text-center text-sm font-semibold text-white">
+                          {artist.name}
+                        </p>
+                        <p className="text-sm">{artist.flag}</p>
+                      </div>
+                    ))}
                   </div>
-                </div>
-                <p className="mt-2 truncate text-base font-bold text-white">
-                  {discovery.track}
-                </p>
-                <p className="truncate text-xs text-spotify-secondary">
-                  {discovery.artist}
-                </p>
-              </div>
-            ))}
-          </div>
+                </>
+              )}
 
-          <SectionHeader
-            title="Artists who just entered your world"
-            subtitle="New-to-you artists you've now engaged with"
-          />
-          <div className="mb-6 flex justify-between gap-2">
-            {PASSPORT_DATA.newArtists.map((artist) => (
-              <div
-                key={artist.name}
-                className="flex min-w-0 flex-1 flex-col items-center"
-              >
-                <ImageWithFallback
-                  src={artist.imageUrl}
-                  alt={artist.name}
-                  className="h-20 w-20 rounded-full object-cover ring-2 ring-spotify-green"
-                  fallbackGradient={PASSPORT_ARTIST_ART[artist.name]}
-                  fallbackClassName="h-20 w-20 rounded-full ring-2 ring-spotify-green"
-                />
-                <p className="mt-2 truncate text-center text-sm font-semibold text-white">
-                  {artist.name}
-                </p>
-                <p className="text-sm">{artist.flag}</p>
-              </div>
-            ))}
-          </div>
+              {content.worlds.length > 0 && (
+                <>
+                  <SectionHeader
+                    title="Worlds you stepped into"
+                    subtitle="Cultural moments you explored through World Tour"
+                  />
+                  <div className="mb-6 space-y-2">
+                    {content.worlds.map((world) => (
+                      <div
+                        key={world.id}
+                        className="tap-scale flex items-center gap-3 rounded-xl bg-white/5 px-3 py-3"
+                      >
+                        <span
+                          className="h-2.5 w-2.5 shrink-0 rounded-full"
+                          style={{
+                            backgroundColor: world.statusColor || "#1DB954",
+                          }}
+                        />
+                        <div className="min-w-0 flex-1">
+                          <p className="font-bold text-white">{world.scene}</p>
+                          <p className="text-xs text-spotify-muted">
+                            {world.region}
+                          </p>
+                        </div>
+                        <p className="shrink-0 text-sm font-bold text-spotify-green">
+                          {world.tracksExplored} tracks explored
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
 
-          <SectionHeader
-            title="Worlds you stepped into"
-            subtitle="Cultural moments you explored through World Tour"
-          />
-          <div className="mb-6 space-y-2">
-            {PASSPORT_DATA.worldsSteppedInto.map((world) => (
-              <div
-                key={world.scene}
-                className="tap-scale flex items-center gap-3 rounded-xl bg-white/5 px-3 py-3"
-              >
-                <span
-                  className="h-2.5 w-2.5 shrink-0 rounded-full"
-                  style={{
-                    backgroundColor: SCENE_COLORS[world.scene] || "#1DB954",
-                  }}
-                />
-                <div className="min-w-0 flex-1">
-                  <p className="font-bold text-white">{world.scene}</p>
-                  <p className="text-xs text-spotify-muted">{world.region}</p>
-                </div>
-                <p className="shrink-0 text-sm font-bold text-spotify-green">
-                  {world.tracksSaved != null
-                    ? `${world.tracksSaved} tracks saved`
-                    : `${world.tracksExplored} tracks explored`}
-                </p>
-              </div>
-            ))}
-          </div>
+              {content.genresSnuckIn.length > 0 && (
+                <>
+                  <SectionHeader
+                    title="Genres that snuck in"
+                    subtitle="These weren't in your vocabulary last month"
+                  />
+                  <div className="mb-6 flex flex-wrap gap-2">
+                    {content.genresSnuckIn.map((genre) => (
+                      <span
+                        key={genre}
+                        className="flex items-center gap-1.5 rounded-full bg-white/[0.04] px-4 py-2 text-sm text-white"
+                      >
+                        <span className="h-2 w-2 shrink-0 rounded-full bg-spotify-green" />
+                        {genre}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              )}
 
-          <SectionHeader
-            title="Genres that snuck in"
-            subtitle="These weren't in your vocabulary last month"
-          />
-          <div className="mb-6 flex flex-wrap gap-2">
-            {PASSPORT_DATA.genresSnuckIn.map((genre) => (
-              <span
-                key={genre}
-                className="flex items-center gap-1.5 rounded-full bg-white/[0.04] px-4 py-2 text-sm text-white"
-              >
-                <span
-                  className="h-2 w-2 shrink-0 rounded-full"
-                  style={{ backgroundColor: GENRE_DOTS[genre] || "#B3B3B3" }}
-                />
-                {genre}
-              </span>
-            ))}
-          </div>
-
-          <SectionHeader
-            title="Your ear speaks more than you think"
-            subtitle="Languages of music you explored"
-          />
-          <div className="mb-6 space-y-3">
-            {PASSPORT_DATA.languageBreakdown.map((item) => (
-              <LanguageBar key={item.lang} item={item} />
-            ))}
-          </div>
+              {content.languageBreakdown.length > 0 && (
+                <>
+                  <SectionHeader
+                    title="Your ear speaks more than you think"
+                    subtitle="Languages of music you explored"
+                  />
+                  <div className="mb-6 space-y-3">
+                    {content.languageBreakdown.map((item) => (
+                      <LanguageBar key={item.lang} item={item} />
+                    ))}
+                  </div>
+                </>
+              )}
+            </>
+          )}
 
           <SectionHeader
             title="Where your music took you"
@@ -328,9 +383,12 @@ export default function PassportPage() {
           />
           <div className="mb-6">
             <PassportJourneyCard
-              kmTraveled={USER_PROFILE.kmTraveled}
-              countries={USER_PROFILE.countries}
-              languages={USER_PROFILE.languages}
+              kmTraveled={stats.kmTraveled}
+              countries={stats.countries}
+              languages={stats.languages}
+              stops={content.journey.stops}
+              flightPaths={content.journey.flightPaths}
+              genreSummary={content.journey.genreSummary}
             />
           </div>
         </div>
@@ -359,7 +417,9 @@ export default function PassportPage() {
         </div>
       </div>
 
-      {showShare && <SharePassport onClose={() => setShowShare(false)} />}
+      {showShare && (
+        <SharePassport stats={stats} onClose={() => setShowShare(false)} />
+      )}
     </MobileLayout>
   );
 }

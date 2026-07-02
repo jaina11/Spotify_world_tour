@@ -32,7 +32,7 @@ function IntroBackground() {
 
 function finishIntro(router) {
   markIntroSeen();
-  router.push("/hub");
+  router.push("/globe");
 }
 
 export default function IntroPage() {
@@ -45,7 +45,7 @@ export default function IntroPage() {
       new URLSearchParams(window.location.search).get("from") === "search";
 
     if (hasSeenIntro() && !fromSearch) {
-      router.replace("/hub");
+      router.replace("/globe");
       return;
     }
     setCanShow(true);
