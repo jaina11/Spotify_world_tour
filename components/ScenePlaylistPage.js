@@ -12,12 +12,13 @@ export default function ScenePlaylistPage({
   heroDescription,
   statusBadge,
   playlistMetadata,
+  backHref = "/events",
 }) {
   let trackNumber = 0;
 
   return (
     <MobileLayout activeTab="home">
-      <StickyPageHeader title={scene.name} backHref="/events" />
+      <StickyPageHeader title={scene.name} backHref={backHref} />
 
       <div className="relative -mx-4">
         <div className="relative h-[200px] w-full overflow-hidden">

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback } from "react";
 import AIInsightCard from "@/components/AIInsightCard";
 import ImageWithFallback from "@/components/ImageWithFallback";
@@ -97,53 +98,68 @@ export default function FestivalsPage() {
       </div>
 
       <div className="space-y-3 px-4 pb-6">
-        {FESTIVALS.map((festival) => (
-          <div
-            key={festival.id}
-            className="overflow-hidden rounded-xl bg-white/[0.04] ring-1 ring-white/10"
-          >
-            <div className="relative h-36 w-full">
-              <ImageWithFallback
-                src={festival.imageUrl}
-                alt={festival.name}
-                className="h-full w-full object-cover"
-                fallbackGradient={`linear-gradient(135deg, ${festival.statusColor}44, #121212)`}
-                fallbackClassName="h-full w-full"
-              />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(to bottom, transparent 30%, rgba(18,18,18,0.95) 100%)",
-                }}
-              />
-              <div className="absolute left-3 top-3">
-                <StatusBadge color={festival.statusColor}>{festival.status}</StatusBadge>
-              </div>
-            </div>
-
-            <div className={`p-4 ${FESTIVAL_TINTS[festival.id] || ""}`}>
-              <h2 className="text-lg font-bold text-white">{festival.name}</h2>
-              <p className="mt-1 text-[11px] uppercase tracking-wider text-white/40">
-                {formatMetaLine(festival)}
-              </p>
-              <p className="mt-1 text-[13px] text-white/60">{festival.description}</p>
-
-              <div className="mt-2 flex flex-wrap items-center text-[10px] font-medium text-spotify-green">
-                {splitDirections(festival.musicDirection).map((item, index, arr) => (
-                  <span key={item}>
-                    {item}
-                    {index < arr.length - 1 ? " · " : ""}
-                  </span>
-                ))}
+        {FESTIVALS.map((festival) => {
+          const card = (
+            <div className="overflow-hidden rounded-xl bg-white/[0.04] ring-1 ring-white/10">
+              <div className="relative h-36 w-full">
+                <ImageWithFallback
+                  src={festival.imageUrl}
+                  alt={festival.name}
+                  className="h-full w-full object-cover"
+                  fallbackGradient={`linear-gradient(135deg, ${festival.statusColor}44, #121212)`}
+                  fallbackClassName="h-full w-full"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to bottom, transparent 30%, rgba(18,18,18,0.95) 100%)",
+                  }}
+                />
+                <div className="absolute left-3 top-3">
+                  <StatusBadge color={festival.statusColor}>
+                    {festival.status}
+                  </StatusBadge>
+                </div>
               </div>
 
-              <AIInsightCard label="Why this is for you" className="mt-3">
-                {festival.insight}
-              </AIInsightCard>
+              <div className={`p-4 ${FESTIVAL_TINTS[festival.id] || ""}`}>
+                <h2 className="text-lg font-bold text-white">{festival.name}</h2>
+                <p className="mt-1 text-[11px] uppercase tracking-wider text-white/40">
+                  {formatMetaLine(festival)}
+                </p>
+                <p className="mt-1 text-[13px] text-white/60">{festival.description}</p>
+
+                <div className="mt-2 flex flex-wrap items-center text-[10px] font-medium text-spotify-green">
+                  {splitDirections(festival.musicDirection).map((item, index, arr) => (
+                    <span key={item}>
+                      {item}
+                      {index < arr.length - 1 ? " · " : ""}
+                    </span>
+                  ))}
+                </div>
+
+                <AIInsightCard label="Why this is for you" className="mt-3">
+                  {festival.insight}
+                </AIInsightCard>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+
+          if (festival.navigable) {
+            return (
+              <Link
+                key={festival.id}
+                href={`/scene/${festival.id}`}
+                className="tap-scale block"
+              >
+                {card}
+              </Link>
+            );
+          }
+
+          return <div key={festival.id}>{card}</div>;
+        })}
       </div>
     </MobileLayout>
   );

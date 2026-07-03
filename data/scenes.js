@@ -170,6 +170,7 @@ export const FESTIVALS = [
     musicDirection: "Afrobeats · Amapiano · R&B",
     imageUrl:
       "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=200&fit=crop",
+    navigable: true,
   },
   {
     id: "montreux-jazz",
@@ -277,6 +278,144 @@ export const FESTIVALS = [
       "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=200&fit=crop",
   },
 ];
+
+export const AFRO_NATION_TRACKS = {
+  pickedForYou: [
+    {
+      name: "Calm Down",
+      artist: "Rema & Selena Gomez",
+      tag: "YOUR MOST-STREAMED AFROBEATS TRACK",
+      imageUrl:
+        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Last Last",
+      artist: "Burna Boy",
+      tag: "MATCHES YOUR TOP GENRE",
+      imageUrl:
+        "https://images.unsplash.com/photo-1571425046056-cfc17c664e94?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Water",
+      artist: "Tyla",
+      tag: null,
+      imageUrl:
+        "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Unavailable",
+      artist: "Davido ft. Musa Keys",
+      tag: null,
+      imageUrl:
+        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=100&h=100&fit=crop",
+    },
+    {
+      name: "People",
+      artist: "Libianca",
+      tag: null,
+      imageUrl:
+        "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=100&h=100&fit=crop",
+    },
+    {
+      name: "No One",
+      artist: "Alicia Keys ft. Tems",
+      tag: null,
+      imageUrl:
+        "https://images.unsplash.com/photo-1508854710579-5cecc3a9ff17?w=100&h=100&fit=crop",
+    },
+  ],
+  trendingNow: [
+    {
+      name: "Big Energy",
+      artist: "Bnxn",
+      tag: "+280% STREAMS THIS WEEK",
+      imageUrl:
+        "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Sability",
+      artist: "Ayra Starr",
+      tag: "TRENDING VIRAL DANCE",
+      imageUrl:
+        "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Happiness",
+      artist: "Sarz ft. Asake & Gunna",
+      tag: null,
+      imageUrl:
+        "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Popsi",
+      artist: "Asake",
+      tag: null,
+      imageUrl:
+        "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Rush",
+      artist: "Ayra Starr",
+      tag: null,
+      imageUrl:
+        "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Organise",
+      artist: "Asake",
+      tag: null,
+      imageUrl:
+        "https://images.unsplash.com/photo-1504680177321-2e6a879aac86?w=100&h=100&fit=crop",
+    },
+  ],
+  hiddenGems: [
+    {
+      name: "Egwu",
+      artist: "Chike & Mohbad",
+      tag: "BREAKOUT — FESTIVAL CROWD FAVORITE",
+      tagColor: "#E8593C",
+      imageUrl:
+        "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Cough (Odo)",
+      artist: "Kizz Daniel",
+      tag: "SINGALONG ANTHEM — UNDERRATED GEM",
+      tagColor: "#E8593C",
+      imageUrl:
+        "https://images.unsplash.com/photo-1513829596324-4bb2800c5efb?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Sisi Ganja",
+      artist: "Joeboy",
+      tag: null,
+      imageUrl:
+        "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Terminator",
+      artist: "Asake",
+      tag: null,
+      imageUrl:
+        "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Sungba (Remix)",
+      artist: "Asake ft. Burna Boy",
+      tag: null,
+      imageUrl:
+        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=100&h=100&fit=crop",
+    },
+    {
+      name: "Sukari",
+      artist: "Zuchu",
+      tag: "EAST AFRICAN CROSSOVER — FRESH SOUND",
+      tagColor: "#E8593C",
+      imageUrl:
+        "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=100&h=100&fit=crop",
+    },
+  ],
+};
 
 export const NAVRATRI_TRACKS = {
   fromYourWorld: [
