@@ -13,6 +13,7 @@ export default function StickyPageHeader({
   title,
   backHref,
   onShare,
+  topPaddingClass = "pt-14",
   backClassName = `${ICON_SLOT} text-xl text-white`,
   shareClassName = `${ICON_SLOT} text-xl text-white`,
 }) {
@@ -31,7 +32,7 @@ export default function StickyPageHeader({
         scrolled ? "bg-[#121212]/95 backdrop-blur-sm" : "bg-transparent"
       }`}
     >
-      <div className={`${HEADER_GRID_COLS} px-4 pb-2 pt-14`}>
+      <div className={`${HEADER_GRID_COLS} px-4 pb-2 ${topPaddingClass}`}>
         <div className="w-10 shrink-0 justify-self-start">
           <Link href={backHref} className={backClassName} aria-label="Back">
             ←
