@@ -60,7 +60,7 @@ export default function IntroPage() {
   }
 
   return (
-    <MobileLayout activeTab="home" hideChrome>
+    <MobileLayout activeTab="home" hideChrome hideNowPlaying>
       <div
         className="relative flex min-h-screen flex-col px-6 pt-16"
         onClick={() => finishIntro(router)}
