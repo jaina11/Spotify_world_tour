@@ -22,11 +22,11 @@ const MAP_PINS = [
 function CardArrowButton({ color }) {
   return (
     <div
-      className="pointer-events-none absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full"
+      className="pointer-events-none absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full"
       style={{ backgroundColor: color }}
       aria-hidden="true"
     >
-      <ChevronRightIcon className="h-5 w-5 text-white" />
+      <ChevronRightIcon className="h-4 w-4 text-white" />
     </div>
   );
 }
@@ -125,16 +125,25 @@ function WorldTourCardBackground() {
 
 function FestivalCardBackground() {
   const confetti = [
-    { cx: 42, cy: 28, r: 3, o: 0.06 },
-    { cx: 88, cy: 52, r: 2, o: 0.04 },
-    { cx: 156, cy: 36, r: 5, o: 0.08 },
-    { cx: 210, cy: 64, r: 2.5, o: 0.05 },
-    { cx: 268, cy: 42, r: 4, o: 0.07 },
-    { cx: 320, cy: 58, r: 2, o: 0.03 },
-    { cx: 360, cy: 34, r: 6, o: 0.08 },
-    { cx: 118, cy: 118, r: 3, o: 0.05 },
-    { cx: 298, cy: 132, r: 2, o: 0.04 },
-    { cx: 196, cy: 148, r: 4, o: 0.06 },
+    { cx: 42, cy: 28, r: 3, o: 0.08 },
+    { cx: 88, cy: 52, r: 2, o: 0.06 },
+    { cx: 156, cy: 36, r: 5, o: 0.1 },
+    { cx: 210, cy: 64, r: 2.5, o: 0.07 },
+    { cx: 268, cy: 42, r: 4, o: 0.09 },
+    { cx: 320, cy: 58, r: 2, o: 0.06 },
+    { cx: 360, cy: 34, r: 6, o: 0.1 },
+    { cx: 118, cy: 118, r: 3, o: 0.08 },
+    { cx: 298, cy: 132, r: 2, o: 0.06 },
+    { cx: 196, cy: 148, r: 4, o: 0.09 },
+  ];
+
+  const sparkles = [
+    { cx: 58, cy: 38, size: 4, o: 0.08 },
+    { cx: 142, cy: 72, size: 6, o: 0.1 },
+    { cx: 228, cy: 48, size: 5, o: 0.07 },
+    { cx: 312, cy: 96, size: 8, o: 0.09 },
+    { cx: 88, cy: 128, size: 4, o: 0.06 },
+    { cx: 348, cy: 140, size: 5, o: 0.08 },
   ];
 
   return (
@@ -156,28 +165,55 @@ function FestivalCardBackground() {
         />
       ))}
 
+      {sparkles.map((star, index) => (
+        <path
+          key={`sparkle-${index}`}
+          d={`M${star.cx} ${star.cy - star.size} L${star.cx + star.size * 0.3} ${star.cy - star.size * 0.3} L${star.cx + star.size} ${star.cy} L${star.cx + star.size * 0.3} ${star.cy + star.size * 0.3} L${star.cx} ${star.cy + star.size} L${star.cx - star.size * 0.3} ${star.cy + star.size * 0.3} L${star.cx - star.size} ${star.cy} L${star.cx - star.size * 0.3} ${star.cy - star.size * 0.3} Z`}
+          fill="white"
+          opacity={star.o}
+        />
+      ))}
+
       <path
         d="M0 72 Q50 62 100 72 T200 72 T300 72 T400 72"
         stroke="white"
         strokeWidth="1"
-        opacity="0.05"
+        opacity="0.08"
       />
       <path
         d="M0 108 Q60 98 120 108 T240 108 T360 108 T400 108"
         stroke="white"
         strokeWidth="1"
-        opacity="0.05"
+        opacity="0.08"
       />
       <path
         d="M0 142 Q70 132 140 142 T280 142 T400 142"
         stroke="white"
         strokeWidth="1"
-        opacity="0.05"
+        opacity="0.08"
       />
 
-      <path d="M72 46 l4 8 l-8 0 l4 -8 z" fill="white" opacity="0.08" />
-      <path d="M248 124 l3 6 l-6 0 l3 -6 z" fill="white" opacity="0.08" />
-      <path d="M334 88 l3.5 7 l-7 0 l3.5 -7 z" fill="white" opacity="0.08" />
+      <path d="M72 46 l4 8 l-8 0 l4 -8 z" fill="white" opacity="0.12" />
+      <path d="M248 124 l3 6 l-6 0 l3 -6 z" fill="white" opacity="0.12" />
+      <path d="M334 88 l3.5 7 l-7 0 l3.5 -7 z" fill="white" opacity="0.12" />
+    </svg>
+  );
+}
+
+function RefreshIcon() {
+  return (
+    <svg
+      className="h-3 w-3 shrink-0"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+      <path d="M21 3v6h-6" />
     </svg>
   );
 }
@@ -207,8 +243,8 @@ export default function TourLandingPage() {
       <StickyPageHeader title="World Tour" backHref="/" />
 
       <div className="px-4 pb-24 pt-14">
-        <h1 className="text-[22px] font-black leading-tight text-white">
-          Your Monthly World Tour
+        <h1 className="text-[26px] font-black leading-tight text-white">
+          Choose your next music journey
         </h1>
 
         <div className="mt-5 space-y-4">
@@ -224,12 +260,21 @@ export default function TourLandingPage() {
             <CardArrowButton color="#7B68EE" />
 
             <div className="pointer-events-none relative z-10 flex h-full max-w-[80%] flex-col pr-12">
-              <h2 className="text-xl font-bold text-white">
-                Your Monthly World Tour
-              </h2>
+              <h2 className="text-xl font-bold text-white">World Tour</h2>
               <p className="mt-2 text-sm text-white/60">
                 Every month, pick 5 countries and discover a playlist shaped by
                 your taste and local trends.
+              </p>
+              <p className="mt-2 text-[11px] text-white/70">
+                <span className="text-xs">🇯🇵</span>
+                <span className="mx-0.5 text-white/20">→</span>
+                <span className="text-xs">🇫🇷</span>
+                <span className="mx-0.5 text-white/20">→</span>
+                <span className="text-xs">🇺🇸</span>
+                <span className="mx-0.5 text-white/20">→</span>
+                <span className="text-xs">🇸🇬</span>
+                <span className="mx-0.5 text-white/20">→</span>
+                <span className="text-xs">🇦🇪</span>
               </p>
               <LabelPills labels={WORLD_TOUR_PILLS} />
             </div>
@@ -244,6 +289,9 @@ export default function TourLandingPage() {
             }}
           >
             <FestivalCardBackground />
+            <span className="absolute left-4 top-4 z-10 rounded-full bg-white/10 px-2 py-0.5 text-[9px] font-medium text-white/60">
+              July 2026
+            </span>
             <CardArrowButton color="#E8593C" />
 
             <div className="pointer-events-none relative z-10 flex h-full max-w-[80%] flex-col pr-12">
@@ -256,6 +304,11 @@ export default function TourLandingPage() {
             </div>
           </Link>
         </div>
+
+        <p className="mt-6 flex items-center justify-center gap-1.5 text-[11px] text-white/25">
+          <RefreshIcon />
+          New tours refresh every month
+        </p>
       </div>
     </MobileLayout>
   );
