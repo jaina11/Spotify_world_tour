@@ -32,9 +32,9 @@ function IntroBackground() {
   );
 }
 
-function finishIntro(router) {
+function finishIntro(router, destination = "/tour") {
   markIntroSeen();
-  router.push("/hub");
+  router.push(destination);
 }
 
 export default function IntroPage() {
@@ -47,7 +47,7 @@ export default function IntroPage() {
       new URLSearchParams(window.location.search).get("from") === "search";
 
     if (hasSeenIntro() && !fromSearch) {
-      router.replace("/hub");
+      router.replace("/tour");
       return;
     }
     setCanShow(true);
@@ -78,7 +78,7 @@ export default function IntroPage() {
           type="button"
           onClick={(e) => {
             e.stopPropagation();
-            finishIntro(router);
+            finishIntro(router, "/");
           }}
           className="relative z-10 self-end text-sm text-spotify-secondary"
         >
@@ -102,7 +102,7 @@ export default function IntroPage() {
           type="button"
           onClick={(e) => {
             e.stopPropagation();
-            finishIntro(router);
+            finishIntro(router, "/tour");
           }}
           className="btn-spotify relative z-10 mb-8 w-full rounded-full bg-spotify-green py-3 text-sm font-bold text-black"
         >
