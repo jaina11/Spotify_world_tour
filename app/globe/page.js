@@ -66,7 +66,7 @@ export default function GlobePage() {
 
         <button
           type="button"
-          onClick={() => hasSelection && router.push("/hub")}
+          onClick={() => hasSelection && router.push("/curating")}
           disabled={!hasSelection}
           className={
             hasSelection
