@@ -18,7 +18,7 @@ import { getExploreCountries } from "@/data/countries";
 import { hasSeenIntro } from "@/data/intro";
 
 const TOUR_BUCKETS = [
-  "From your world",
+  "Picked for you",
   "Trending now",
   "Hidden gem",
 ];
@@ -97,19 +97,13 @@ export default function HubPage() {
             <div className="relative flex flex-1 flex-col">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0 flex-1 pr-14">
-                  <h2 className="text-lg font-black text-white">Your Tour</h2>
+                  <h2 className="text-lg font-black text-white">Trending Festivals</h2>
                   <p className="mt-1 text-sm text-white/70">
-                    A tour curated for you, based on your past listening history
+                    Festival playlists from around the world
                   </p>
                 </div>
                 <ChevronRightIcon className="mt-1 h-5 w-5 shrink-0 text-white/80" />
               </div>
-
-              <p className="mt-3 text-[13px] leading-relaxed text-white/55">
-                Discover what your listening already says about where you&apos;d
-                travel — familiar sounds, trending picks, and hidden gems curated
-                just for you.
-              </p>
 
               <div className="mt-auto flex flex-wrap gap-x-3 gap-y-2 pt-5">
                 {TOUR_BUCKETS.map((label) => (
@@ -160,18 +154,11 @@ export default function HubPage() {
                     Explore the World
                   </h2>
                   <p className="mt-1 text-sm text-white/70">
-                    Curate your own trip — pick a country, we&apos;ll suggest the
-                    trendiest music based on your taste
+                    Pick a country, discover its sound
                   </p>
                 </div>
                 <ChevronRightIcon className="mt-1 h-5 w-5 shrink-0 text-white/80" />
               </div>
-
-              <p className="mt-3 text-[13px] leading-relaxed text-white/55">
-                Curious about a place you&apos;ve never streamed from? Pick any
-                country and get a playlist matched to your taste, tuned to
-                what&apos;s trending there right now.
-              </p>
 
               <p className="mt-auto pt-5 text-[10px] font-medium uppercase tracking-wider text-white/40">
                 {getExploreCountries().length} countries to start

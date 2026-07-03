@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import MobileLayout from "@/components/MobileLayout";
@@ -53,30 +55,157 @@ const MUSIC_VIDEOS = [
   },
 ];
 
-function WorldMapPattern() {
+const HEADING_WORDS = ["Let's", "build", "your", "world", "tour."];
+const SUBTITLE_WORDS = ["Explore", "music", "made", "just", "for", "you."];
+
+function FadeInWords({ words, baseDelay = 0, stagger = 0.15 }) {
+  return words.map((word, index) => (
+    <span
+      key={`${word}-${index}`}
+      className="wt-fade-in-word inline-block"
+      style={{ animationDelay: `${baseDelay + index * stagger}s` }}
+    >
+      {word}
+      {index < words.length - 1 ? "\u00A0" : ""}
+    </span>
+  ));
+}
+
+function WorldTourMapBackground() {
   return (
     <svg
-      className="absolute right-0 top-0 h-full w-2/3 opacity-10"
-      viewBox="0 0 200 120"
+      className="pointer-events-none absolute inset-0 h-full w-full"
+      viewBox="0 0 360 176"
       fill="none"
-      aria-hidden
+      aria-hidden="true"
+      preserveAspectRatio="xMidYMid slice"
     >
-      <ellipse cx="100" cy="60" rx="90" ry="50" stroke="#1DB954" strokeWidth="1" />
       <path
-        d="M30 55c20-15 45-20 70-12s50 8 70-5"
+        d="M42 58c18-10 38-14 58-8s42 6 62-2 48-4 68 8 30 18 42 34-8 20-28 28-50 24-34-6-62 2-88-10-30-14-58-8-72 4-18 16-20 36-8 48-16 8-36 6-52-6-18-12-22-30-12-42Z"
         stroke="#1DB954"
-        strokeWidth="0.8"
+        strokeWidth="0.5"
+        opacity="0.08"
       />
       <path
-        d="M25 70c25 10 55 12 80 5s45-18 70-8"
+        d="M58 96c24 8 48 10 72 4s52-4 78 10 34 22 38 40-22 18-44 14-58-8-82-4-46 10-64-2-24-16-20-38-4-52 26-16 52-10Z"
         stroke="#1DB954"
-        strokeWidth="0.8"
+        strokeWidth="0.5"
+        opacity="0.08"
       />
-      <circle cx="60" cy="48" r="2" fill="#1DB954" />
-      <circle cx="120" cy="42" r="2" fill="#1DB954" />
-      <circle cx="145" cy="65" r="2" fill="#1DB954" />
-      <circle cx="85" cy="72" r="2" fill="#1DB954" />
+      <path
+        d="M250 72c16-6 30-4 42 6s18 18 14 30-16 16-30 12-24-10-34-6-18 4-28-2-8-14 2-26 12-18 24-14Z"
+        stroke="#1DB954"
+        strokeWidth="0.5"
+        opacity="0.08"
+      />
+
+      <circle cx="248" cy="72" r="3" fill="#1DB954" opacity="0.25" />
+      <circle cx="296" cy="58" r="3" fill="#1DB954" opacity="0.25" />
+      <circle cx="310" cy="52" r="3" fill="#1DB954" opacity="0.25" />
+      <circle cx="168" cy="82" r="3" fill="#1DB954" opacity="0.25" />
+      <circle cx="118" cy="118" r="3" fill="#1DB954" opacity="0.25" />
+      <circle cx="78" cy="68" r="3" fill="#1DB954" opacity="0.25" />
+
+      <path
+        d="M248 72 Q272 58 296 58 T310 52"
+        stroke="#1DB954"
+        strokeWidth="0.5"
+        opacity="0.12"
+        strokeDasharray="4 3"
+      />
+      <path
+        d="M310 52 Q252 72 168 82"
+        stroke="#1DB954"
+        strokeWidth="0.5"
+        opacity="0.12"
+        strokeDasharray="4 3"
+      />
+      <path
+        d="M168 82 Q138 104 118 118"
+        stroke="#1DB954"
+        strokeWidth="0.5"
+        opacity="0.12"
+        strokeDasharray="4 3"
+      />
+      <path
+        d="M118 118 Q92 96 78 68"
+        stroke="#1DB954"
+        strokeWidth="0.5"
+        opacity="0.12"
+        strokeDasharray="4 3"
+      />
+      <path
+        d="M78 68 Q148 58 248 72"
+        stroke="#1DB954"
+        strokeWidth="0.5"
+        opacity="0.12"
+        strokeDasharray="4 3"
+      />
     </svg>
+  );
+}
+
+function PassportStampIcon({ className = "h-4 w-4" }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1"
+      aria-hidden="true"
+    >
+      <rect x="2" y="3" width="12" height="10" rx="1" opacity="0.9" />
+      <path d="M4 6h8M4 8.5h5M4 11h6" opacity="0.7" />
+    </svg>
+  );
+}
+
+function WorldTourEntryCard() {
+  return (
+    <Link href="/hub" className="tap-scale mb-5 block">
+      <div className="relative h-44 overflow-hidden rounded-xl bg-[#0A1A12] p-4">
+        <WorldTourMapBackground />
+
+        <span
+          className="wt-float-1 pointer-events-none absolute right-12 top-3 text-lg opacity-[0.12]"
+          aria-hidden="true"
+        >
+          🎧
+        </span>
+        <span
+          className="wt-float-2 pointer-events-none absolute bottom-8 right-6 text-sm opacity-10"
+          aria-hidden="true"
+        >
+          🎵
+        </span>
+        <span
+          className="wt-float-3 pointer-events-none absolute right-4 top-8 text-[#1DB954] opacity-10"
+          aria-hidden="true"
+        >
+          <PassportStampIcon />
+        </span>
+
+        <div className="relative z-10 max-w-[72%]">
+          <span className="mb-2 inline-block rounded-full bg-white/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white/60">
+            Beta
+          </span>
+          <h3 className="text-lg font-black text-white">
+            <FadeInWords words={HEADING_WORDS} />
+          </h3>
+          <p className="mt-1 text-sm text-white/50">
+            <FadeInWords words={SUBTITLE_WORDS} baseDelay={0.8} />
+          </p>
+        </div>
+
+        <div
+          className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-spotify-green"
+          aria-hidden="true"
+        >
+          <span className="text-lg font-bold text-white">→</span>
+        </div>
+      </div>
+    </Link>
   );
 }
 
@@ -136,33 +265,8 @@ export default function Home() {
           ))}
         </div>
 
-        <Link href="/intro?from=search" className="tap-scale mb-5 block">
-          <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-[#0A2F1A] to-[#121212] p-4">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(29,185,84,0.15)_1px,transparent_0)] bg-[length:12px_12px] opacity-40" />
-            <WorldMapPattern />
-            <div className="relative flex items-center gap-3">
-              <div className="w-1 shrink-0 self-stretch rounded-full bg-spotify-green" />
-              <div className="min-w-0 flex-1">
-                <span className="inline-block rounded-full border border-spotify-green/30 bg-spotify-green/20 px-3 py-1 text-xs font-bold text-spotify-green">
-                  World Tour
-                </span>
-                <h3 className="mt-2 text-lg font-black text-white">
-                  Your music has been places
-                </h3>
-                <p className="mt-1 text-sm text-spotify-secondary">
-                  5 countries, 4 languages — even without you noticing
-                </p>
-              </div>
-              <div className="flex shrink-0 items-center gap-2">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-spotify-green opacity-60" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-spotify-green" />
-                </span>
-                <span className="text-spotify-green">→</span>
-              </div>
-            </div>
-          </div>
-        </Link>
+        <h2 className="mb-3 text-base font-bold text-white">Your own World Tour</h2>
+        <WorldTourEntryCard />
 
         <h2 className="mb-3 text-base font-black text-white">
           Explore music videos

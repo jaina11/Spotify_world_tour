@@ -3,7 +3,7 @@ import { NAVRATRI_TRACKS, SCENES } from "@/data/scenes";
 
 const SECTIONS = [
   {
-    title: "From your world",
+    title: "Picked for you",
     subtitle: "Artists you already love, festival-ready",
     tracks: NAVRATRI_TRACKS.fromYourWorld,
   },

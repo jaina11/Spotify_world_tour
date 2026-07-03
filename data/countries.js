@@ -89,7 +89,7 @@ export function getExploreCountries() {
 
 const NIGERIA_SECTIONS = [
   {
-    title: "From your world",
+    title: "Picked for you",
     subtitle: "Afrobeats anthems already in your rotation",
     tracks: [
       {
@@ -183,7 +183,7 @@ const NIGERIA_SECTIONS = [
 
 const JAPAN_SECTIONS = [
   {
-    title: "From your world",
+    title: "Picked for you",
     subtitle: "J-pop and city pop already in your orbit",
     tracks: [
       {
@@ -276,7 +276,7 @@ const JAPAN_SECTIONS = [
 
 const AUSTRALIA_SECTIONS = [
   {
-    title: "From your world",
+    title: "Picked for you",
     subtitle: "Australian indie already on your radar",
     tracks: [
       {
@@ -369,7 +369,7 @@ const AUSTRALIA_SECTIONS = [
 
 const UK_SECTIONS = [
   {
-    title: "From your world",
+    title: "Picked for you",
     subtitle: "UK alt and pop already in your rotation",
     tracks: [
       {
@@ -462,7 +462,7 @@ const UK_SECTIONS = [
 
 const CHINA_SECTIONS = [
   {
-    title: "From your world",
+    title: "Picked for you",
     subtitle: "Mandarin pop and hip-hop already in your orbit",
     tracks: [
       {
@@ -555,7 +555,7 @@ const CHINA_SECTIONS = [
 
 const NEPAL_SECTIONS = [
   {
-    title: "From your world",
+    title: "Picked for you",
     subtitle: "Nepali indie already crossing your folk playlists",
     tracks: [
       {
@@ -648,7 +648,7 @@ const NEPAL_SECTIONS = [
 
 const GREECE_SECTIONS = [
   {
-    title: "From your world",
+    title: "Picked for you",
     subtitle: "Greek pop and laiko already in your summer rotation",
     tracks: [
       {
@@ -741,7 +741,7 @@ const GREECE_SECTIONS = [
 
 const GENERIC_SECTIONS = (countryName) => [
   {
-    title: "From your world",
+    title: "Picked for you",
     subtitle: `Tracks that bridge ${countryName} and your taste`,
     tracks: [
       {

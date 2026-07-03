@@ -190,3 +190,61 @@ body {
 .passport-icon-pulse {
   animation: passportIconPulse 3.5s ease-in-out infinite;
 }
+
+@keyframes wt-float-1 {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes wt-float-2 {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes wt-float-3 {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.wt-float-1 {
+  animation: wt-float-1 3s ease-in-out infinite;
+}
+
+.wt-float-2 {
+  animation: wt-float-2 4s ease-in-out infinite 1s;
+}
+
+.wt-float-3 {
+  animation: wt-float-3 3.5s ease-in-out infinite 0.5s;
+}
+
+@keyframes fadeInWord {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wt-fade-in-word {
+  opacity: 0;
+  animation: fadeInWord 0.4s ease forwards;
+}

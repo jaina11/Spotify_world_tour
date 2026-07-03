@@ -1,6 +1,6 @@
 export const YOUR_TOUR_SECTIONS = [
   {
-    title: "From your world",
+    title: "Picked for you",
     subtitle: "Artists you already love, ready for your next listen",
     tracks: [
       {

@@ -3,7 +3,7 @@ import { LAGOS_TRACKS, SCENES } from "@/data/scenes";
 
 const SECTIONS = [
   {
-    title: "From your world",
+    title: "Picked for you",
     subtitle: "The anthems everyone already knows",
     tracks: LAGOS_TRACKS.fromYourWorld,
   },
