@@ -6,14 +6,7 @@ import InteractiveGlobe from "@/components/InteractiveGlobe";
 import MobileLayout from "@/components/MobileLayout";
 import StickyPageHeader from "@/components/StickyPageHeader";
 
-const COUNTRIES = [
-  "India",
-  "Nigeria",
-  "S.Korea",
-  "Japan",
-  "Mexico",
-  "Brazil",
-];
+const CITIES = ["Tokyo", "Paris", "New York", "Singapore", "Dubai"];
 
 export default function GlobePage() {
   const router = useRouter();
@@ -36,18 +29,18 @@ export default function GlobePage() {
         </div>
 
         <p className="mt-4 text-center text-sm text-white/40">
-          Tap a country to discover its sound
+          Tap a city to discover its sound
         </p>
 
         <div className="mt-4 flex flex-wrap justify-center gap-2">
-          {COUNTRIES.map((country) => (
+          {CITIES.map((city) => (
             <button
-              key={country}
+              key={city}
               type="button"
               onClick={() => router.push("/hub")}
               className="rounded-full bg-white/[0.06] px-3 py-1.5 text-[11px] text-white/70"
             >
-              {country}
+              {city}
             </button>
           ))}
         </div>

@@ -22,7 +22,7 @@ const MAP_PINS = [
 function CardArrowButton({ color }) {
   return (
     <div
-      className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full"
+      className="pointer-events-none absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full"
       style={{ backgroundColor: color }}
       aria-hidden="true"
     >
@@ -212,49 +212,47 @@ export default function TourLandingPage() {
         </h1>
 
         <div className="mt-5 space-y-4">
-          <Link href="/globe" className="tap-scale block">
-            <div
-              className="relative flex h-48 flex-col overflow-hidden rounded-xl p-4 ring-1 ring-white/10"
-              style={{
-                background:
-                  "linear-gradient(135deg, #0D1B3E 0%, #1A0A3E 40%, #0A1A2F 100%)",
-              }}
-            >
-              <WorldTourCardBackground />
-              <CardArrowButton color="#7B68EE" />
+          <Link
+            href="/globe"
+            className="tap-scale relative block h-48 overflow-hidden rounded-xl p-4 ring-1 ring-white/10"
+            style={{
+              background:
+                "linear-gradient(135deg, #0D1B3E 0%, #1A0A3E 40%, #0A1A2F 100%)",
+            }}
+          >
+            <WorldTourCardBackground />
+            <CardArrowButton color="#7B68EE" />
 
-              <div className="relative z-10 flex h-full max-w-[80%] flex-col pr-12">
-                <h2 className="text-xl font-bold text-white">
-                  Your Monthly World Tour
-                </h2>
-                <p className="mt-2 text-sm text-white/60">
-                  Every month, pick 5 countries and discover a playlist shaped
-                  by your taste and local trends.
-                </p>
-                <LabelPills labels={WORLD_TOUR_PILLS} />
-              </div>
+            <div className="pointer-events-none relative z-10 flex h-full max-w-[80%] flex-col pr-12">
+              <h2 className="text-xl font-bold text-white">
+                Your Monthly World Tour
+              </h2>
+              <p className="mt-2 text-sm text-white/60">
+                Every month, pick 5 countries and discover a playlist shaped by
+                your taste and local trends.
+              </p>
+              <LabelPills labels={WORLD_TOUR_PILLS} />
             </div>
           </Link>
 
-          <Link href="/festivals" className="tap-scale block">
-            <div
-              className="relative flex h-48 flex-col overflow-hidden rounded-xl p-4 ring-1 ring-white/10"
-              style={{
-                background:
-                  "linear-gradient(135deg, #1A3D20 0%, #3D2A0A 50%, #3D1A2A 100%)",
-              }}
-            >
-              <FestivalCardBackground />
-              <CardArrowButton color="#E8593C" />
+          <Link
+            href="/festivals"
+            className="tap-scale relative block h-48 overflow-hidden rounded-xl p-4 ring-1 ring-white/10"
+            style={{
+              background:
+                "linear-gradient(135deg, #1A3D20 0%, #3D2A0A 50%, #3D1A2A 100%)",
+            }}
+          >
+            <FestivalCardBackground />
+            <CardArrowButton color="#E8593C" />
 
-              <div className="relative z-10 flex h-full max-w-[80%] flex-col pr-12">
-                <h2 className="text-xl font-bold text-white">Trending Festivals</h2>
-                <p className="mt-2 text-sm text-white/60">
-                  Explore this month&apos;s global festivals through music,
-                  culture, and trending sounds.
-                </p>
-                <LabelPills labels={FESTIVAL_PILLS} />
-              </div>
+            <div className="pointer-events-none relative z-10 flex h-full max-w-[80%] flex-col pr-12">
+              <h2 className="text-xl font-bold text-white">Trending Festivals</h2>
+              <p className="mt-2 text-sm text-white/60">
+                Explore this month&apos;s global festivals through music, culture,
+                and trending sounds.
+              </p>
+              <LabelPills labels={FESTIVAL_PILLS} />
             </div>
           </Link>
         </div>
