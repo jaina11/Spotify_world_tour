@@ -6,7 +6,7 @@ import StickyPageHeader from "@/components/StickyPageHeader";
 import TrackRow from "@/components/TrackRow";
 import { USER_PROFILE, WORLD_TOUR_TRACKS } from "@/data/scenes";
 
-const CITY_ORDER = ["tokyo", "paris", "newYork", "singapore", "dubai"];
+const CITIES = Object.values(WORLD_TOUR_TRACKS);
 
 function HeroMapTexture() {
   return (
@@ -90,8 +90,7 @@ export default function WorldTourPage() {
       <div className="px-4">
         <AIInsightCard label="Your story here" className="mb-4">
           From Tokyo neon nights to Dubai desert beats — your listening history
-          says you&apos;re ready to go global. We picked songs that match your
-          vibe in every city.
+          says you&apos;re ready to go global.
         </AIInsightCard>
 
         <div className="mb-1 flex items-center gap-2">
@@ -139,43 +138,37 @@ export default function WorldTourPage() {
           </div>
         </div>
 
-        {CITY_ORDER.map((cityKey, cityIndex) => {
-          const city = WORLD_TOUR_TRACKS[cityKey];
+        {CITIES.map((city) => (
+          <div key={city.city}>
+            <section className="mb-4">
+              <div className="mb-1 flex items-baseline justify-between">
+                <h2 className="text-lg font-bold text-white">
+                  {city.flag} {city.city}
+                </h2>
+                <button
+                  type="button"
+                  className="text-xs font-bold text-spotify-secondary"
+                >
+                  Show more
+                </button>
+              </div>
+              <p className="mb-2 text-[11px] text-white/40">{city.subtitle}</p>
+              {city.tracks.map((track) => {
+                trackNumber += 1;
+                return (
+                  <TrackRow
+                    key={`${city.city}-${track.name}`}
+                    track={track}
+                    index={trackNumber}
+                    tagColor={track.tagColor}
+                  />
+                );
+              })}
+            </section>
 
-          return (
-            <div key={cityKey}>
-              <section className="mb-4">
-                <div className="mb-1 flex items-baseline justify-between">
-                  <h2 className="text-lg font-bold text-white">
-                    {city.flag} {city.city}
-                  </h2>
-                  <button
-                    type="button"
-                    className="text-xs font-bold text-spotify-secondary"
-                  >
-                    Show more
-                  </button>
-                </div>
-                <p className="mb-2 text-[11px] text-white/40">{city.subtitle}</p>
-                {city.tracks.map((track) => {
-                  trackNumber += 1;
-                  return (
-                    <TrackRow
-                      key={`${cityKey}-${track.name}`}
-                      track={track}
-                      index={trackNumber}
-                      tagColor={track.tagColor}
-                    />
-                  );
-                })}
-              </section>
-
-              {cityIndex < CITY_ORDER.length - 1 && (
-                <div className="my-4 h-px w-full bg-white/[0.06]" />
-              )}
-            </div>
-          );
-        })}
+            <div className="my-4 h-px w-full bg-white/[0.06]" />
+          </div>
+        ))}
       </div>
     </MobileLayout>
   );
