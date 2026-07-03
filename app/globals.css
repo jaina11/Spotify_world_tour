@@ -309,15 +309,15 @@ body {
     opacity: 0;
     transform: translateY(6px);
   }
-  10% {
+  8% {
     opacity: 1;
     transform: translateY(0);
   }
-  70% {
+  75% {
     opacity: 1;
     transform: translateY(0);
   }
-  85% {
+  90% {
     opacity: 0;
     transform: translateY(-4px);
   }
@@ -328,10 +328,10 @@ body {
 }
 
 .wt-text-cycle {
-  animation: textCycle 4s ease infinite;
+  animation: textCycle 7s ease infinite;
 }
 
 .wt-text-cycle-delay {
-  animation: textCycle 4s ease infinite;
+  animation: textCycle 7s ease infinite;
   animation-delay: 0.5s;
 }

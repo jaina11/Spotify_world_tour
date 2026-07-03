@@ -177,7 +177,7 @@ function WorldTourEntryCard() {
           <h3 className="wt-text-cycle text-lg font-black text-white">
             Let&apos;s build your world tour.
           </h3>
-          <p className="wt-text-cycle-delay mt-1 text-sm text-white/50">
+          <p className="wt-text-cycle-delay mt-1 text-[11px] leading-relaxed text-white/50">
             Curate your next playlist across borders, cultures, and sounds matched
             to your taste.
           </p>
