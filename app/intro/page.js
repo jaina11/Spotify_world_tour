@@ -9,23 +9,13 @@ import { hasSeenIntro, markIntroSeen } from "@/data/intro";
 function IntroBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-      <div className="absolute inset-x-0 top-0 h-[40%] w-full opacity-50">
-        <IntroWorldMap />
-      </div>
+      <IntroWorldMap />
 
       <div
-        className="absolute inset-x-0 top-0 h-[55%]"
+        className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.92) 100%)",
-        }}
-      />
-
-      <div
-        className="absolute inset-x-0 bottom-0 h-[45%]"
-        style={{
-          background:
-            "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.95) 100%)",
+            "linear-gradient(180deg, rgba(18,18,18,0.35) 0%, rgba(18,18,18,0.55) 50%, rgba(18,18,18,0.88) 100%)",
         }}
       />
     </div>
@@ -64,7 +54,7 @@ export default function IntroPage() {
   return (
     <MobileLayout activeTab="home" hideChrome hideNowPlaying>
       <div
-        className="relative flex min-h-screen flex-col px-6 pt-16"
+        className="relative flex min-h-screen flex-col overflow-hidden bg-[#121212] px-6 pt-16"
         onClick={() => finishIntro(router)}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") finishIntro(router);
