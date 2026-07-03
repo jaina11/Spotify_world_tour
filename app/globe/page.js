@@ -51,7 +51,7 @@ export default function GlobePage() {
               <button
                 key={city}
                 type="button"
-                onClick={() => toggleCity(city)}
+                onClick={() => router.push("/scene/world-tour")}
                 className={
                   isSelected
                     ? "rounded-full bg-spotify-green px-4 py-2 text-xs font-bold text-black"
@@ -66,7 +66,7 @@ export default function GlobePage() {
 
         <button
           type="button"
-          onClick={() => hasSelection && router.push("/curating")}
+          onClick={() => hasSelection && router.push("/scene/world-tour")}
           disabled={!hasSelection}
           className={
             hasSelection

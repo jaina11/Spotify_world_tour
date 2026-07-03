@@ -279,6 +279,224 @@ export const FESTIVALS = [
   },
 ];
 
+export const WORLD_TOUR_TRACKS = {
+  tokyo: {
+    city: "Tokyo",
+    country: "Japan",
+    flag: "🇯🇵",
+    subtitle: "J-pop, city pop, and the sound of neon nights",
+    tracks: [
+      {
+        name: "Blue Jeans",
+        artist: "HANA",
+        tag: "TRENDING IN TOKYO THIS WEEK",
+        imageUrl:
+          "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=100&h=100&fit=crop",
+      },
+      {
+        name: "IRIS OUT",
+        artist: "Kenshi Yonezu",
+        tag: "MATCHES YOUR J-POP TASTE",
+        imageUrl:
+          "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=100&h=100&fit=crop",
+      },
+      {
+        name: "GALA",
+        artist: "XG",
+        tag: null,
+        imageUrl:
+          "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=100&h=100&fit=crop",
+      },
+      {
+        name: "wo ai ni",
+        artist: "WEDNESDAY CAMPANELLA",
+        tag: null,
+        imageUrl:
+          "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Golden",
+        artist: "HUNTR/X, EJAE & others",
+        tag: "TOKYO-SINGAPORE CROSSOVER",
+        imageUrl:
+          "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=100&h=100&fit=crop",
+      },
+    ],
+  },
+  paris: {
+    city: "Paris",
+    country: "France",
+    flag: "🇫🇷",
+    subtitle: "French pop, romance, and late-night café energy",
+    tracks: [
+      {
+        name: "Dernière danse",
+        artist: "Indila",
+        tag: "ICONIC FRENCH POP",
+        imageUrl:
+          "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Je te laisserai des mots",
+        artist: "Patrick Watson",
+        tag: "HIDDEN GEM — PARIS CAFÉ MOOD",
+        imageUrl:
+          "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Houdini",
+        artist: "Dua Lipa",
+        tag: null,
+        imageUrl:
+          "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Flowers",
+        artist: "Miley Cyrus",
+        tag: null,
+        imageUrl:
+          "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Party 4 U",
+        artist: "Charli XCX",
+        tag: null,
+        imageUrl:
+          "https://images.unsplash.com/photo-1508854710579-5cecc3a9ff17?w=100&h=100&fit=crop",
+      },
+    ],
+  },
+  newYork: {
+    city: "New York",
+    country: "USA",
+    flag: "🇺🇸",
+    subtitle: "Pop anthems, indie hits, and Broadway energy",
+    tracks: [
+      {
+        name: "Espresso",
+        artist: "Sabrina Carpenter",
+        tag: "+350% STREAMS THIS MONTH",
+        imageUrl:
+          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Beautiful Things",
+        artist: "Benson Boone",
+        tag: "MATCHES YOUR MOOD",
+        imageUrl:
+          "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Tears",
+        artist: "Sabrina Carpenter",
+        tag: null,
+        imageUrl:
+          "https://images.unsplash.com/photo-1504680177321-2e6a879aac86?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Lose Control",
+        artist: "Teddy Swims",
+        tag: null,
+        imageUrl:
+          "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=100&h=100&fit=crop",
+      },
+      {
+        name: "The Dead Dance",
+        artist: "Lady Gaga",
+        tag: "NEW RELEASE",
+        imageUrl:
+          "https://images.unsplash.com/photo-1571425046056-cfc17c664e94?w=100&h=100&fit=crop",
+      },
+    ],
+  },
+  singapore: {
+    city: "Singapore",
+    country: "Singapore",
+    flag: "🇸🇬",
+    subtitle: "K-pop crossovers, dance-pop, and Southeast Asian heat",
+    tracks: [
+      {
+        name: "APT.",
+        artist: "ROSÉ, Bruno Mars",
+        tag: "VIRAL HIT — SINGAPORE'S #1",
+        imageUrl:
+          "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?w=100&h=100&fit=crop",
+      },
+      {
+        name: "JUMP",
+        artist: "BLACKPINK",
+        tag: "MATCHES YOUR K-POP TASTE",
+        imageUrl:
+          "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Die With A Smile",
+        artist: "Bruno Mars, Lady Gaga",
+        tag: null,
+        imageUrl:
+          "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Rush",
+        artist: "Troye Sivan",
+        tag: null,
+        imageUrl:
+          "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Cordelia",
+        artist: "Little Life",
+        tag: "LOCAL INDIE PICK",
+        imageUrl:
+          "https://images.unsplash.com/photo-1513829596324-4bb2800c5efb?w=100&h=100&fit=crop",
+      },
+    ],
+  },
+  dubai: {
+    city: "Dubai",
+    country: "UAE",
+    flag: "🇦🇪",
+    subtitle: "Arabic pop, Bollywood crossovers, and desert nightclub energy",
+    tracks: [
+      {
+        name: "Chammak Challo",
+        artist: "Akon, Hamsika Iyer",
+        tag: "BOLLYWOOD MEETS DUBAI — PERFECT FOR YOU",
+        imageUrl:
+          "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Ya Tabtab",
+        artist: "Nancy Ajram",
+        tag: "ICONIC ARABIC POP",
+        imageUrl:
+          "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Habibi Ya Noor El Ain",
+        artist: "Amr Diab",
+        tag: null,
+        imageUrl:
+          "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=100&h=100&fit=crop",
+      },
+      {
+        name: "One Love",
+        artist: "Shubh",
+        tag: "PUNJABI-DUBAI CROSSOVER",
+        imageUrl:
+          "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=100&h=100&fit=crop",
+      },
+      {
+        name: "Calm Down",
+        artist: "Rema",
+        tag: null,
+        imageUrl:
+          "https://images.unsplash.com/photo-1559386484-97dfc0e15539?w=100&h=100&fit=crop",
+      },
+    ],
+  },
+};
+
 export const AFRO_NATION_TRACKS = {
   pickedForYou: [
     {
