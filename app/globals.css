@@ -233,18 +233,34 @@ body {
   animation: wt-float-3 3.5s ease-in-out infinite 0.5s;
 }
 
-@keyframes fadeInWord {
-  from {
+@keyframes textCycle {
+  0% {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(6px);
   }
-  to {
+  10% {
     opacity: 1;
     transform: translateY(0);
   }
+  70% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  85% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
 }
 
-.wt-fade-in-word {
-  opacity: 0;
-  animation: fadeInWord 0.4s ease forwards;
+.wt-text-cycle {
+  animation: textCycle 4s ease infinite;
+}
+
+.wt-text-cycle-delay {
+  animation: textCycle 4s ease infinite;
+  animation-delay: 0.5s;
 }

@@ -55,19 +55,15 @@ const MUSIC_VIDEOS = [
   },
 ];
 
-const HEADING_WORDS = ["Let's", "build", "your", "world", "tour."];
-const SUBTITLE_WORDS = ["Explore", "music", "made", "just", "for", "you."];
+const CONTINENT_PATHS = [
+  "M42 58c18-10 38-14 58-8s42 6 62-2 48-4 68 8 30 18 42 34-8 20-28 28-50 24-34-6-62 2-88-10-30-14-58-8-72 4-18 16-20 36-8 48-16 8-36 6-52-6-18-12-22-30-12-42Z",
+  "M58 96c24 8 48 10 72 4s52-4 78 10 34 22 38 40-22 18-44 14-58-8-82-4-46 10-64-2-24-16-20-38-4-52 26-16 52-10Z",
+  "M250 72c16-6 30-4 42 6s18 18 14 30-16 16-30 12-24-10-34-6-18 4-28-2-8-14 2-26 12-18 24-14Z",
+];
 
-function FadeInWords({ words, baseDelay = 0, stagger = 0.15 }) {
-  return words.map((word, index) => (
-    <span
-      key={`${word}-${index}`}
-      className="wt-fade-in-word inline-block"
-      style={{ animationDelay: `${baseDelay + index * stagger}s` }}
-    >
-      {word}
-      {index < words.length - 1 ? "\u00A0" : ""}
-    </span>
+function ContinentShapes({ opacity }) {
+  return CONTINENT_PATHS.map((d) => (
+    <path key={d} d={d} fill="#1DB954" opacity={opacity} />
   ));
 }
 
@@ -80,65 +76,53 @@ function WorldTourMapBackground() {
       aria-hidden="true"
       preserveAspectRatio="xMidYMid slice"
     >
-      <path
-        d="M42 58c18-10 38-14 58-8s42 6 62-2 48-4 68 8 30 18 42 34-8 20-28 28-50 24-34-6-62 2-88-10-30-14-58-8-72 4-18 16-20 36-8 48-16 8-36 6-52-6-18-12-22-30-12-42Z"
-        stroke="#1DB954"
-        strokeWidth="0.5"
-        opacity="0.08"
-      />
-      <path
-        d="M58 96c24 8 48 10 72 4s52-4 78 10 34 22 38 40-22 18-44 14-58-8-82-4-46 10-64-2-24-16-20-38-4-52 26-16 52-10Z"
-        stroke="#1DB954"
-        strokeWidth="0.5"
-        opacity="0.08"
-      />
-      <path
-        d="M250 72c16-6 30-4 42 6s18 18 14 30-16 16-30 12-24-10-34-6-18 4-28-2-8-14 2-26 12-18 24-14Z"
-        stroke="#1DB954"
-        strokeWidth="0.5"
-        opacity="0.08"
-      />
+      <g opacity="0.02" transform="translate(2 2)">
+        <ContinentShapes opacity={1} />
+      </g>
+      <g opacity="0.04">
+        <ContinentShapes opacity={1} />
+      </g>
 
-      <circle cx="248" cy="72" r="3" fill="#1DB954" opacity="0.25" />
-      <circle cx="296" cy="58" r="3" fill="#1DB954" opacity="0.25" />
-      <circle cx="310" cy="52" r="3" fill="#1DB954" opacity="0.25" />
-      <circle cx="168" cy="82" r="3" fill="#1DB954" opacity="0.25" />
-      <circle cx="118" cy="118" r="3" fill="#1DB954" opacity="0.25" />
-      <circle cx="78" cy="68" r="3" fill="#1DB954" opacity="0.25" />
+      <circle cx="248" cy="72" r="3" fill="#1DB954" opacity="0.35" />
+      <circle cx="296" cy="58" r="3" fill="#1DB954" opacity="0.35" />
+      <circle cx="310" cy="52" r="3" fill="#1DB954" opacity="0.35" />
+      <circle cx="168" cy="82" r="3" fill="#1DB954" opacity="0.35" />
+      <circle cx="118" cy="118" r="3" fill="#1DB954" opacity="0.35" />
+      <circle cx="78" cy="68" r="3" fill="#1DB954" opacity="0.35" />
 
       <path
         d="M248 72 Q272 58 296 58 T310 52"
         stroke="#1DB954"
         strokeWidth="0.5"
-        opacity="0.12"
+        opacity="0.18"
         strokeDasharray="4 3"
       />
       <path
         d="M310 52 Q252 72 168 82"
         stroke="#1DB954"
         strokeWidth="0.5"
-        opacity="0.12"
+        opacity="0.18"
         strokeDasharray="4 3"
       />
       <path
         d="M168 82 Q138 104 118 118"
         stroke="#1DB954"
         strokeWidth="0.5"
-        opacity="0.12"
+        opacity="0.18"
         strokeDasharray="4 3"
       />
       <path
         d="M118 118 Q92 96 78 68"
         stroke="#1DB954"
         strokeWidth="0.5"
-        opacity="0.12"
+        opacity="0.18"
         strokeDasharray="4 3"
       />
       <path
         d="M78 68 Q148 58 248 72"
         stroke="#1DB954"
         strokeWidth="0.5"
-        opacity="0.12"
+        opacity="0.18"
         strokeDasharray="4 3"
       />
     </svg>
@@ -164,7 +148,7 @@ function PassportStampIcon({ className = "h-4 w-4" }) {
 function WorldTourEntryCard() {
   return (
     <Link href="/hub" className="tap-scale mb-5 block">
-      <div className="relative h-44 overflow-hidden rounded-xl bg-[#0A1A12] p-4">
+      <div className="relative h-36 overflow-hidden rounded-xl bg-[#0A1A12] p-4">
         <WorldTourMapBackground />
 
         <span
@@ -174,7 +158,7 @@ function WorldTourEntryCard() {
           🎧
         </span>
         <span
-          className="wt-float-2 pointer-events-none absolute bottom-8 right-6 text-sm opacity-10"
+          className="wt-float-2 pointer-events-none absolute bottom-5 right-6 text-sm opacity-10"
           aria-hidden="true"
         >
           🎵
@@ -190,11 +174,11 @@ function WorldTourEntryCard() {
           <span className="mb-2 inline-block rounded-full bg-white/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white/60">
             Beta
           </span>
-          <h3 className="text-lg font-black text-white">
-            <FadeInWords words={HEADING_WORDS} />
+          <h3 className="wt-text-cycle text-lg font-black text-white">
+            Let&apos;s build your world tour.
           </h3>
-          <p className="mt-1 text-sm text-white/50">
-            <FadeInWords words={SUBTITLE_WORDS} baseDelay={0.8} />
+          <p className="wt-text-cycle-delay mt-1 text-sm text-white/50">
+            Explore music made just for you.
           </p>
         </div>
 
