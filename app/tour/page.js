@@ -8,7 +8,7 @@ import StickyPageHeader from "@/components/StickyPageHeader";
 import { ChevronRightIcon } from "@/components/icons";
 import { hasSeenIntro } from "@/data/intro";
 
-const WORLD_TOUR_PILLS = ["Updated monthly", "Local hits", "Hidden gems"];
+const WORLD_TOUR_PILLS = ["Updated monthly", "Local hits"];
 const FESTIVAL_PILLS = ["Monthly picks", "Cultural sounds", "Trending now"];
 
 const MAP_PINS = [
@@ -262,19 +262,8 @@ export default function TourLandingPage() {
             <div className="pointer-events-none relative z-10 flex h-full max-w-[80%] flex-col pr-12">
               <h2 className="text-xl font-bold text-white">World Tour</h2>
               <p className="mt-2 text-sm text-white/60">
-                Every month, pick 5 countries and discover a playlist shaped by
-                your taste and local trends.
-              </p>
-              <p className="mt-2 text-[11px] text-white/70">
-                <span className="text-xs">🇯🇵</span>
-                <span className="mx-0.5 text-white/20">→</span>
-                <span className="text-xs">🇫🇷</span>
-                <span className="mx-0.5 text-white/20">→</span>
-                <span className="text-xs">🇺🇸</span>
-                <span className="mx-0.5 text-white/20">→</span>
-                <span className="text-xs">🇸🇬</span>
-                <span className="mx-0.5 text-white/20">→</span>
-                <span className="text-xs">🇦🇪</span>
+                Pick your favorite countries each month and discover trending
+                local sounds matched to your taste.
               </p>
               <LabelPills labels={WORLD_TOUR_PILLS} />
             </div>
@@ -289,9 +278,6 @@ export default function TourLandingPage() {
             }}
           >
             <FestivalCardBackground />
-            <span className="absolute left-4 top-4 z-10 rounded-full bg-white/10 px-2 py-0.5 text-[9px] font-medium text-white/60">
-              July 2026
-            </span>
             <CardArrowButton color="#E8593C" />
 
             <div className="pointer-events-none relative z-10 flex h-full max-w-[80%] flex-col pr-12">
