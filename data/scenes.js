@@ -155,6 +155,129 @@ export const SCENES = [
   },
 ];
 
+export const FESTIVALS = [
+  {
+    id: "afro-nation",
+    name: "Afro Nation",
+    date: "July 3–5, 2026",
+    location: "Portugal",
+    status: "LIVE NOW",
+    statusColor: "#E8593C",
+    description:
+      "A global showcase for afrobeats, amapiano, R&B, and Black diaspora sounds.",
+    insight:
+      "You've been adding Afrobeats all month — Afro Nation is where that sound comes alive. This is your genre's biggest stage.",
+    musicDirection: "Afrobeats · Amapiano · R&B",
+    imageUrl:
+      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=200&fit=crop",
+  },
+  {
+    id: "montreux-jazz",
+    name: "Montreux Jazz Festival",
+    date: "July 3–18, 2026",
+    location: "Switzerland",
+    status: "LIVE NOW",
+    statusColor: "#E8593C",
+    description:
+      "A legendary Swiss music festival that began with jazz and now spans many genres.",
+    insight:
+      "Jazz, soul, blues — the roots behind half your playlist. Montreux has been shaping these sounds for 60 years.",
+    musicDirection: "Jazz · Soul · Blues · Crossover",
+    imageUrl:
+      "https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=400&h=200&fit=crop",
+  },
+  {
+    id: "hemis",
+    name: "Hemis Festival",
+    date: "July 5–6, 2026",
+    location: "Ladakh, India",
+    status: "LIVE NOW",
+    statusColor: "#E8593C",
+    description:
+      "A Ladakh Buddhist festival with masked dances, chants, and monastery rituals.",
+    insight:
+      "You explore Indian music deeply — Hemis takes you to a completely different sonic world within the same country. Himalayan chants, not Bollywood.",
+    musicDirection: "Tibetan chants · Himalayan folk · Devotional",
+    imageUrl:
+      "https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=400&h=200&fit=crop",
+  },
+  {
+    id: "rath-yatra",
+    name: "Rath Yatra",
+    date: "Around July 7, 2026",
+    location: "Odisha, India",
+    status: "THIS WEEK",
+    statusColor: "#F0A030",
+    description:
+      "A major Odisha chariot festival honoring Lord Jagannath with grand processions and devotional celebration.",
+    insight:
+      "Your Gujarati music roots connect here — Rath Yatra is celebrated across Gujarat too. The devotional energy is the same, the sound is different.",
+    musicDirection: "Bhajans · Kirtan · Devotional procession",
+    imageUrl:
+      "https://images.unsplash.com/photo-1605117882932-f9bef1e4de8b?w=400&h=200&fit=crop",
+  },
+  {
+    id: "tomorrowland",
+    name: "Tomorrowland",
+    date: "July 17–26, 2026",
+    location: "Belgium",
+    status: "COMING UP",
+    statusColor: "#7B68EE",
+    description:
+      "A huge electronic music festival in Belgium known for world-class EDM production.",
+    insight:
+      "Your energy-heavy tracks and high-BPM listening sessions say you'd fit right in. This is where electronic music peaks every year.",
+    musicDirection: "EDM · House · Techno",
+    imageUrl:
+      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=200&fit=crop",
+  },
+  {
+    id: "fuji-rock",
+    name: "Fuji Rock",
+    date: "July 24–26, 2026",
+    location: "Niigata, Japan",
+    status: "COMING UP",
+    statusColor: "#7B68EE",
+    description:
+      "Japan's signature mountain festival blending rock, indie, and global acts in a scenic setting.",
+    insight:
+      "You're based in Japan and you stream J-pop — Fuji Rock is happening in your backyard. Indie rock meets mountain air.",
+    musicDirection: "Indie rock · Alt-pop · Live bands",
+    imageUrl:
+      "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400&h=200&fit=crop",
+  },
+  {
+    id: "bonalu",
+    name: "Bonalu",
+    date: "Late July 2026",
+    location: "Telangana, India",
+    status: "COMING UP",
+    statusColor: "#7B68EE",
+    description:
+      "A Telangana festival honoring Goddess Mahakali with offerings, drums, and processions.",
+    insight:
+      "You know Indian festival music from Gujarat — Bonalu brings Telangana's raw drumming and temple energy. Same spirit, completely different sound.",
+    musicDirection: "Folk drums · Temple songs · Regional devotional",
+    imageUrl:
+      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=200&fit=crop",
+  },
+  {
+    id: "guru-purnima",
+    name: "Guru Purnima",
+    date: "Around July 29, 2026",
+    location: "Pan-India",
+    status: "COMING UP",
+    statusColor: "#7B68EE",
+    description:
+      "A pan-Indian day to honor teachers, gurus, and spiritual guides.",
+    insight:
+      "After the high-energy festival tracks, Guru Purnima brings the calm. Classical ragas and reflective bhakti — your playlist's quiet side.",
+    musicDirection: "Bhakti · Classical · Reflective devotional",
+    imageUrl:
+      "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=200&fit=crop",
+  },
+];
+
 export const NAVRATRI_TRACKS = {
   fromYourWorld: [
     {

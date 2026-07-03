@@ -236,7 +236,7 @@ export default function HubPage() {
             </div>
           </Link>
 
-          <Link href="/hub" className="tap-scale block">
+          <Link href="/festivals" className="tap-scale block">
             <div
               className="relative flex h-48 flex-col overflow-hidden rounded-xl p-4 ring-1 ring-white/10"
               style={{
