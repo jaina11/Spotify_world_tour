@@ -178,7 +178,8 @@ function WorldTourEntryCard() {
             Let&apos;s build your world tour.
           </h3>
           <p className="wt-text-cycle-delay mt-1 text-sm text-white/50">
-            Explore music made just for you.
+            Curate your next playlist across borders, cultures, and sounds matched
+            to your taste.
           </p>
         </div>
 
@@ -249,7 +250,9 @@ export default function Home() {
           ))}
         </div>
 
-        <h2 className="mb-3 text-base font-bold text-white">Your own World Tour</h2>
+        <h2 className="mb-3 text-base font-bold text-white">
+          Global sounds, made for you
+        </h2>
         <WorldTourEntryCard />
 
         <h2 className="mb-3 text-base font-black text-white">
