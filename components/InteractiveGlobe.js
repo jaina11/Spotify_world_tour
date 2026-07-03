@@ -1,10 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { Component, useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
-
-const Globe = dynamic(() => import("react-globe.gl"), { ssr: false });
+import IntroWorldMap from "@/components/IntroWorldMap";
 
 const POINTS = [
   { lat: 35.6762, lng: 139.6503, name: "Tokyo", color: "#7B68EE", size: 0.8 },
@@ -44,6 +43,69 @@ const ARCS = [
     color: "#7B68EE",
   },
 ];
+
+function GlobeLoading() {
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "350px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#6A6A6A",
+        fontSize: "13px",
+      }}
+    >
+      Loading globe...
+    </div>
+  );
+}
+
+function GlobeFallback() {
+  return (
+    <div className="flex h-full w-full items-center justify-center">
+      <IntroWorldMap />
+    </div>
+  );
+}
+
+const Globe = dynamic(
+  () =>
+    import("react-globe.gl")
+      .then((mod) => (mod.default ? { default: mod.default } : mod))
+      .catch((error) => {
+        console.error("Failed to load react-globe.gl:", error);
+        return { default: GlobeFallback };
+      }),
+  {
+    ssr: false,
+    loading: () => <GlobeLoading />,
+  }
+);
+
+class GlobeErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error) {
+    console.error("Globe render error:", error);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <GlobeFallback />;
+    }
+
+    return this.props.children;
+  }
+}
 
 export default function InteractiveGlobe({ width, height }) {
   const router = useRouter();
@@ -91,35 +153,37 @@ export default function InteractiveGlobe({ width, height }) {
 
   return (
     <div ref={containerRef} className="h-full w-full">
-      <Globe
-        ref={globeRef}
-        width={size.width}
-        height={size.height}
-        globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
-        backgroundColor="rgba(0,0,0,0)"
-        atmosphereColor="#1DB954"
-        atmosphereAltitude={0.2}
-        pointsData={POINTS}
-        pointAltitude={0.01}
-        pointRadius={(point) => point.size}
-        pointColor={(point) => point.color}
-        pointLabel={(point) => point.name}
-        onPointClick={handlePointClick}
-        labelsData={POINTS}
-        labelText={(point) => point.name}
-        labelSize={1.2}
-        labelColor={() => "#FFFFFF"}
-        labelDotRadius={0.4}
-        labelAltitude={0.01}
-        labelResolution={2}
-        arcsData={ARCS}
-        arcColor={(arc) => arc.color}
-        arcDashLength={0.4}
-        arcDashGap={0.2}
-        arcDashAnimateTime={3000}
-        arcStroke={0.5}
-        onGlobeReady={handleGlobeReady}
-      />
+      <GlobeErrorBoundary>
+        <Globe
+          ref={globeRef}
+          width={size.width}
+          height={size.height}
+          globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+          backgroundColor="rgba(0,0,0,0)"
+          atmosphereColor="#1DB954"
+          atmosphereAltitude={0.2}
+          pointsData={POINTS}
+          pointAltitude={0.01}
+          pointRadius={(point) => point.size}
+          pointColor={(point) => point.color}
+          pointLabel={(point) => point.name}
+          onPointClick={handlePointClick}
+          labelsData={POINTS}
+          labelText={(point) => point.name}
+          labelSize={1.2}
+          labelColor={() => "#FFFFFF"}
+          labelDotRadius={0.4}
+          labelAltitude={0.01}
+          labelResolution={2}
+          arcsData={ARCS}
+          arcColor={(arc) => arc.color}
+          arcDashLength={0.4}
+          arcDashGap={0.2}
+          arcDashAnimateTime={3000}
+          arcStroke={0.5}
+          onGlobeReady={handleGlobeReady}
+        />
+      </GlobeErrorBoundary>
     </div>
   );
 }
