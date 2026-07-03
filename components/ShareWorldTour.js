@@ -1,7 +1,6 @@
 "use client";
 
 import ImageWithFallback from "@/components/ImageWithFallback";
-import { USER_PROFILE } from "@/data/scenes";
 
 const STARS = [
   { top: "4%", left: "12%", opacity: 0.25 },
@@ -31,7 +30,7 @@ const TOP_DISCOVERIES = [
     artist: "Indila",
     imageUrl:
       "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=100&h=100&fit=crop",
-    bars: [6, 12, 8, 16, 10, 14],
+    bars: [4, 8, 5, 10, 6, 9],
   },
   {
     num: 2,
@@ -39,7 +38,7 @@ const TOP_DISCOVERIES = [
     artist: "HANA",
     imageUrl:
       "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=100&h=100&fit=crop",
-    bars: [10, 6, 14, 8, 12, 7],
+    bars: [7, 4, 9, 5, 8, 4],
   },
   {
     num: 3,
@@ -47,7 +46,7 @@ const TOP_DISCOVERIES = [
     artist: "Akon",
     imageUrl:
       "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=100&h=100&fit=crop",
-    bars: [8, 14, 6, 16, 9, 11],
+    bars: [5, 9, 4, 10, 6, 7],
   },
 ];
 
@@ -61,7 +60,7 @@ const GENRE_PILLS = [
 function GlobeIcon() {
   return (
     <svg
-      className="mx-auto h-5 w-5"
+      className="mx-auto h-4 w-4"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -77,17 +76,14 @@ function GlobeIcon() {
 function MusicNoteIcon() {
   return (
     <svg
-      className="mx-auto h-5 w-5"
+      className="mx-auto h-4 w-4"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"
       aria-hidden="true"
     >
-      <path
-        d="M9 18V5l12-2v13"
-        className="stroke-white/40"
-      />
+      <path d="M9 18V5l12-2v13" className="stroke-white/40" />
       <circle cx="6" cy="18" r="3" className="stroke-white/40" />
       <circle cx="18" cy="16" r="3" className="stroke-white/40" />
     </svg>
@@ -97,7 +93,7 @@ function MusicNoteIcon() {
 function ClockIcon() {
   return (
     <svg
-      className="mx-auto h-5 w-5"
+      className="mx-auto h-4 w-4"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -112,7 +108,7 @@ function ClockIcon() {
 
 function SparkleIcon() {
   return (
-    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="#1DB954" aria-hidden="true">
+    <svg className="h-3 w-3" viewBox="0 0 24 24" fill="#1DB954" aria-hidden="true">
       <path d="M12 2l1.8 5.5L19 9.3l-5.2 1.8L12 16.3l-1.8-5.2L5 9.3l5.2-1.8L12 2z" />
     </svg>
   );
@@ -121,7 +117,7 @@ function SparkleIcon() {
 function CompassIcon() {
   return (
     <svg
-      className="h-4 w-4"
+      className="h-3 w-3"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -136,7 +132,7 @@ function CompassIcon() {
 
 function SoundWaveBars({ bars }) {
   return (
-    <div className="flex h-4 items-end gap-[2px]">
+    <div className="flex h-[10px] items-end gap-[2px]">
       {bars.map((height, index) => (
         <span
           key={index}
@@ -150,8 +146,8 @@ function SoundWaveBars({ bars }) {
 
 function SpotifyMiniLogo() {
   return (
-    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-spotify-green">
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-spotify-green">
+      <svg className="h-3 w-3" viewBox="0 0 24 24" fill="white" aria-hidden="true">
         <path d="M6 15.5c4.5-1 9.5-1 14-0.2-.3.7-1 1.2-1.8 1.2-3.8 0-7.5-1.2-10.5-3.3-.4-.3-.8-.1-.7.3zM5 11.8c5.2-1.2 11-1.2 16.2-.3-.4.8-1.3 1.4-2.2 1.4-4.3 0-8.5-1.3-11.8-3.6-.5-.3-.9 0-.8.5zM4.2 8.2C10.4 6.8 17.2 6.8 23.4 8c-.5 1-1.6 1.7-2.8 1.7-5 0-9.8-1.5-13.6-4.1-.6-.4-1 .1-.8.6z" />
       </svg>
     </div>
@@ -159,18 +155,16 @@ function SpotifyMiniLogo() {
 }
 
 export default function ShareWorldTour({ onClose }) {
-  const displayName = USER_PROFILE.name || "Jimmy";
-
   return (
     <div
-      className="animate-fade-in fixed inset-0 z-50 flex max-h-screen flex-col items-center justify-center bg-black/80 px-4 py-3 backdrop-blur-sm"
+      className="animate-fade-in fixed inset-0 z-50 flex max-h-screen flex-col items-center justify-center bg-black/80 px-4 py-2 backdrop-blur-sm"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Share world tour"
     >
       <div
-        className="relative max-h-[90vh] w-[340px] overflow-hidden rounded-2xl font-sans"
+        className="relative max-h-[85vh] w-[300px] overflow-hidden rounded-2xl font-sans"
         style={{
           background:
             "linear-gradient(180deg, #0D1040 0%, #1A0A3E 15%, #0A3D5F 30%, #1DB954 48%, #0A5C2F 58%, #E8593C 75%, #F0A030 88%, #C04020 100%)",
@@ -218,71 +212,71 @@ export default function ShareWorldTour({ onClose }) {
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-3 top-3 z-20 text-xl text-white/50"
+          className="absolute right-2.5 top-2.5 z-20 text-lg text-white/50"
           aria-label="Close"
         >
           ×
         </button>
 
-        <div className="relative z-10 px-5 text-center">
-          <div className="pt-6">
-            <p className="text-[9px] font-medium uppercase tracking-[5px] text-white/50">
+        <div className="relative z-10 px-4 text-center">
+          <div className="pt-5">
+            <p className="text-[8px] font-medium uppercase tracking-[4px] text-white/50">
               SPOTIFY WORLD TOUR
             </p>
-            <p className="mt-1 text-[10px] tracking-[2px] text-white/35">
+            <p className="mt-1 text-[8px] tracking-[2px] text-white/35">
               JULY 2026
             </p>
-            <p className="mt-2 text-[8px] tracking-[6px] text-white/15">
+            <p className="mt-2 text-[6px] tracking-[6px] text-white/15">
               · · · · · · · · ·
             </p>
           </div>
 
           <div className="mt-3">
-            <p className="text-[26px] font-black italic leading-none text-white">
-              {displayName}&apos;s
+            <p className="text-[28px] font-black italic leading-none text-white">
+              Jimmy&apos;s
             </p>
-            <p className="text-[26px] font-black leading-tight text-white">
+            <p className="text-[28px] font-black leading-tight text-white">
               World Tour
             </p>
           </div>
 
-          <div className="mt-3">
-            <p className="text-lg leading-relaxed text-white">
+          <div className="mt-2">
+            <p className="text-sm leading-relaxed text-white">
               <span>🇯🇵</span>
-              <span className="mx-1 text-sm text-white/30">→</span>
+              <span className="mx-0.5 text-xs text-white/30">→</span>
               <span>🇫🇷</span>
-              <span className="mx-1 text-sm text-white/30">→</span>
+              <span className="mx-0.5 text-xs text-white/30">→</span>
               <span>🇺🇸</span>
-              <span className="mx-1 text-sm text-white/30">→</span>
+              <span className="mx-0.5 text-xs text-white/30">→</span>
               <span>🇸🇬</span>
-              <span className="mx-1 text-sm text-white/30">→</span>
+              <span className="mx-0.5 text-xs text-white/30">→</span>
               <span>🇦🇪</span>
             </p>
-            <p className="mt-1 text-[11px] text-white/60">
+            <p className="mt-1 text-[10px] text-white/60">
               5 countries. 1 playlist. A monthly journey made for you.
             </p>
           </div>
 
-          <div className="mt-3 rounded-xl border border-white/10 bg-white/[0.08] px-3 py-3 backdrop-blur-sm">
+          <div className="mt-3 rounded-xl border border-white/10 bg-white/[0.08] px-3 py-2.5 backdrop-blur-sm">
             <div className="flex">
-              <div className="flex-1 border-r border-white/10 py-1">
+              <div className="flex-1 border-r border-white/10 py-0.5">
                 <GlobeIcon />
-                <p className="mt-1 text-[24px] font-black text-white">5</p>
-                <p className="text-[9px] font-medium uppercase tracking-wider text-white/40">
+                <p className="mt-0.5 text-[20px] font-black text-white">5</p>
+                <p className="text-[8px] font-medium uppercase tracking-wider text-white/40">
                   Countries
                 </p>
               </div>
-              <div className="flex-1 border-r border-white/10 py-1">
+              <div className="flex-1 border-r border-white/10 py-0.5">
                 <MusicNoteIcon />
-                <p className="mt-1 text-[24px] font-black text-white">25</p>
-                <p className="text-[9px] font-medium uppercase tracking-wider text-white/40">
+                <p className="mt-0.5 text-[20px] font-black text-white">25</p>
+                <p className="text-[8px] font-medium uppercase tracking-wider text-white/40">
                   Tracks
                 </p>
               </div>
-              <div className="flex-1 py-1">
+              <div className="flex-1 py-0.5">
                 <ClockIcon />
-                <p className="mt-1 text-[24px] font-black text-white">1h 32m</p>
-                <p className="text-[9px] font-medium uppercase tracking-wider text-white/40">
+                <p className="mt-0.5 text-[20px] font-black text-white">1h 32m</p>
+                <p className="text-[8px] font-medium uppercase tracking-wider text-white/40">
                   Playtime
                 </p>
               </div>
@@ -290,31 +284,31 @@ export default function ShareWorldTour({ onClose }) {
           </div>
 
           <div className="mt-3 text-left">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <SparkleIcon />
-              <p className="text-sm font-bold text-white">Top Discoveries</p>
+              <p className="text-xs font-bold text-white">Top Discoveries</p>
             </div>
             <div className="mt-1.5 space-y-1.5">
               {TOP_DISCOVERIES.map((track) => (
                 <div
                   key={track.num}
-                  className="flex items-center gap-2.5 rounded-lg border border-white/[0.08] bg-white/[0.06] p-2 backdrop-blur-sm"
+                  className="flex items-center gap-2 rounded-md border border-white/[0.08] bg-white/[0.06] p-1.5 backdrop-blur-sm"
                 >
-                  <span className="w-4 text-sm font-bold text-spotify-green">
+                  <span className="w-3.5 text-xs font-bold text-spotify-green">
                     {track.num}
                   </span>
                   <ImageWithFallback
                     src={track.imageUrl}
                     alt={track.name}
-                    className="h-9 w-9 shrink-0 rounded-md object-cover"
+                    className="h-8 w-8 shrink-0 rounded-md object-cover"
                     fallbackGradient="linear-gradient(135deg, #444, #222)"
-                    fallbackClassName="h-9 w-9 shrink-0 rounded-md"
+                    fallbackClassName="h-8 w-8 shrink-0 rounded-md"
                   />
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-bold text-white">
+                    <p className="truncate text-xs font-bold text-white">
                       {track.name}
                     </p>
-                    <p className="truncate text-[11px] text-white/50">
+                    <p className="truncate text-[9px] text-white/50">
                       {track.artist}
                     </p>
                   </div>
@@ -325,27 +319,27 @@ export default function ShareWorldTour({ onClose }) {
           </div>
 
           <div className="mt-3 text-left">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <CompassIcon />
-              <p className="text-sm font-bold text-white">Your journey explored</p>
+              <p className="text-xs font-bold text-white">Your journey explored</p>
             </div>
             <div className="mt-1.5 flex flex-wrap gap-1.5">
               {GENRE_PILLS.map((genre) => (
                 <span
                   key={genre.label}
-                  className="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.08] px-2.5 py-1"
+                  className="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.08] px-2 py-0.5"
                 >
                   <span
-                    className="h-2 w-2 rounded-full"
+                    className="h-1.5 w-1.5 rounded-full"
                     style={{ backgroundColor: genre.dot }}
                   />
-                  <span className="text-[10px] text-white/70">{genre.label}</span>
+                  <span className="text-[9px] text-white/70">{genre.label}</span>
                 </span>
               ))}
             </div>
-            <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-spotify-green/20 bg-white/[0.04] px-2.5 py-1">
+            <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-spotify-green/20 bg-white/[0.04] px-2 py-0.5">
               <svg
-                className="h-3.5 w-3.5"
+                className="h-3 w-3"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="#1DB954"
@@ -355,7 +349,7 @@ export default function ShareWorldTour({ onClose }) {
                 <circle cx="12" cy="12" r="9" />
                 <path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18" />
               </svg>
-              <span className="text-[10px] text-spotify-green">
+              <span className="text-[9px] text-spotify-green">
                 New language explored
               </span>
             </div>
@@ -363,18 +357,18 @@ export default function ShareWorldTour({ onClose }) {
 
           <button
             type="button"
-            className="mb-4 mt-3 flex w-full items-center rounded-xl border border-[#F0A030]/40 bg-black/30 px-4 py-2.5"
+            className="mb-4 mt-3 flex w-full items-center gap-2 rounded-lg border border-[#F0A030]/40 bg-black/30 px-3 py-2"
           >
             <SpotifyMiniLogo />
-            <span className="flex-1 text-sm font-bold text-white">
+            <span className="flex-1 text-left text-xs font-bold text-white">
               Build yours on Spotify
             </span>
-            <span className="text-white/50">&gt;</span>
+            <span className="text-xs text-white/50">&gt;</span>
           </button>
         </div>
       </div>
 
-      <p className="mt-2 text-center text-[10px] text-white/40">
+      <p className="mt-1.5 text-center text-[9px] text-white/40">
         Screenshot to share on your story
       </p>
     </div>
