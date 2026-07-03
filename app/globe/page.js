@@ -7,10 +7,11 @@ import MobileLayout from "@/components/MobileLayout";
 import StickyPageHeader from "@/components/StickyPageHeader";
 
 const CITIES = ["Tokyo", "Paris", "New York", "Singapore", "Dubai"];
+const REQUIRED_CITY_COUNT = 5;
 
 export default function GlobePage() {
   const router = useRouter();
-  const [selectedCities, setSelectedCities] = useState(CITIES);
+  const [selectedCities, setSelectedCities] = useState([]);
 
   const toggleCity = (city) => {
     setSelectedCities((current) =>
@@ -20,27 +21,42 @@ export default function GlobePage() {
     );
   };
 
-  const hasSelection = selectedCities.length > 0;
+  const allCitiesSelected = selectedCities.length === REQUIRED_CITY_COUNT;
 
   return (
     <MobileLayout activeTab="home" hideNowPlaying>
       <StickyPageHeader
-        title="Explore the World"
+        title="Build Your July Tour"
         backHref="/tour"
         onShare={() => {}}
       />
 
       <div className="flex min-h-screen flex-col bg-[#121212] px-4 pb-24 pt-14">
         <h1 className="text-center text-sm font-bold text-white">
-          Explore the World
+          Build Your July Tour
         </h1>
+        <p className="mt-1 text-center text-xs text-white/30">
+          Pick countries from around the world — we&apos;ll match trending local
+          sounds to your taste
+        </p>
 
         <div className="mt-4 h-[60vh] w-full">
           <InteractiveGlobe />
         </div>
 
-        <p className="mb-3 mt-4 text-center text-sm text-white/50">
-          Select cities for your world tour
+        <p className="mb-4 mt-4 px-2 text-center text-sm text-white/50">
+          Spin the globe and pick your destinations. Select 5 cities below to
+          curate your personalized July playlist.
+        </p>
+
+        <p
+          className={`mb-2 text-center text-xs ${
+            allCitiesSelected ? "text-spotify-green" : "text-white/40"
+          }`}
+        >
+          {allCitiesSelected
+            ? "All 5 cities selected ✓"
+            : `${selectedCities.length}/5 cities selected`}
         </p>
 
         <div className="flex flex-wrap justify-center gap-2">
@@ -51,7 +67,7 @@ export default function GlobePage() {
               <button
                 key={city}
                 type="button"
-                onClick={() => router.push("/scene/world-tour")}
+                onClick={() => toggleCity(city)}
                 className={
                   isSelected
                     ? "rounded-full bg-spotify-green px-4 py-2 text-xs font-bold text-black"
@@ -66,17 +82,24 @@ export default function GlobePage() {
 
         <button
           type="button"
-          onClick={() => hasSelection && router.push("/scene/world-tour")}
-          disabled={!hasSelection}
-          className={
-            hasSelection
-              ? "btn-spotify mx-4 mt-5 w-[calc(100%-2rem)] rounded-full bg-spotify-green py-3 text-center text-sm font-bold text-black"
-              : "mx-4 mt-5 w-[calc(100%-2rem)] cursor-not-allowed rounded-full bg-white/10 py-3 text-center text-sm font-bold text-white/30"
-          }
+          onClick={() => allCitiesSelected && router.push("/curating")}
+          disabled={!allCitiesSelected}
+          className={`mx-4 mt-5 w-[calc(100%-2rem)] rounded-full py-3 text-center text-sm font-bold transition-all duration-300 ${
+            allCitiesSelected
+              ? "btn-spotify bg-spotify-green text-black"
+              : "cursor-not-allowed bg-white/[0.08] text-white/30"
+          }`}
         >
-          Curate My Playlist ({selectedCities.length}{" "}
-          {selectedCities.length === 1 ? "city" : "cities"}) →
+          {allCitiesSelected
+            ? "Curate My Playlist →"
+            : "Select all 5 cities to continue"}
         </button>
+
+        {!allCitiesSelected && (
+          <p className="mt-2 text-center text-[11px] text-white/30">
+            This is a prototype — select all 5 cities to experience the full flow
+          </p>
+        )}
       </div>
     </MobileLayout>
   );
