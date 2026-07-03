@@ -147,7 +147,7 @@ function PassportStampIcon({ className = "h-4 w-4" }) {
 
 function WorldTourEntryCard() {
   return (
-    <Link href="/hub" className="tap-scale mb-5 block">
+    <Link href="/intro?from=search" className="tap-scale mb-5 block">
       <div className="relative h-36 overflow-hidden rounded-xl bg-[#0A1A12] p-4">
         <WorldTourMapBackground />
 
