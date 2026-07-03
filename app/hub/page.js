@@ -44,7 +44,7 @@ export default function HubPage() {
   }
 
   return (
-    <MobileLayout activeTab="home">
+    <MobileLayout activeTab="home" hideNowPlaying>
       <StickyPageHeader title="World Tour" backHref="/" />
 
       <div className="relative -mx-4">

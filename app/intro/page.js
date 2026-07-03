@@ -53,7 +53,7 @@ export default function IntroPage() {
 
   if (!canShow) {
     return (
-      <MobileLayout activeTab="home" hideChrome>
+      <MobileLayout activeTab="home" hideChrome hideNowPlaying>
         <div className="min-h-screen bg-black" />
       </MobileLayout>
     );
