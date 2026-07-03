@@ -141,6 +141,34 @@ body {
   transform-origin: center;
 }
 
+@keyframes shareSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-share-slide-up {
+  animation: shareSlideUp 500ms ease forwards;
+}
+
+@keyframes introMapFlightDash {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+.intro-map-flight-path {
+  animation: introMapFlightDash 20s linear infinite;
+}
+
 @keyframes introFlightPath {
   from {
     stroke-dashoffset: 0;

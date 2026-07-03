@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import AIInsightCard from "@/components/AIInsightCard";
 import MobileLayout from "@/components/MobileLayout";
+import ShareWorldTour from "@/components/ShareWorldTour";
 import StickyPageHeader from "@/components/StickyPageHeader";
 import TrackRow from "@/components/TrackRow";
 import { USER_PROFILE, WORLD_TOUR_TRACKS } from "@/data/scenes";
@@ -47,7 +49,14 @@ function HeroMapTexture() {
 }
 
 export default function WorldTourPage() {
+  const [showShareButton, setShowShareButton] = useState(false);
+  const [showShareCard, setShowShareCard] = useState(false);
   let trackNumber = 0;
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowShareButton(true), 10000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <MobileLayout activeTab="home">
@@ -170,6 +179,32 @@ export default function WorldTourPage() {
           </div>
         ))}
       </div>
+
+      {showShareButton && (
+        <button
+          type="button"
+          onClick={() => setShowShareCard(true)}
+          className="animate-share-slide-up fixed bottom-28 left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 rounded-full bg-spotify-green/90 px-6 py-2.5 backdrop-blur-sm"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            aria-hidden="true"
+            className="text-black"
+          >
+            <path d="M7 17L17 7M17 7H9M17 7V15" />
+          </svg>
+          <span className="text-xs font-bold text-black">Share Your July Tour</span>
+        </button>
+      )}
+
+      {showShareCard && (
+        <ShareWorldTour onClose={() => setShowShareCard(false)} />
+      )}
     </MobileLayout>
   );
 }

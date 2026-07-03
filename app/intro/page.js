@@ -9,7 +9,9 @@ import { hasSeenIntro, markIntroSeen } from "@/data/intro";
 function IntroBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-      <IntroWorldMap />
+      <div className="absolute inset-0 h-full w-full">
+        <IntroWorldMap />
+      </div>
 
       <div
         className="absolute inset-0"
