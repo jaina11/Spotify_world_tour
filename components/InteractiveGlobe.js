@@ -105,6 +105,13 @@ export default function InteractiveGlobe({ width, height }) {
         pointColor={(point) => point.color}
         pointLabel={(point) => point.name}
         onPointClick={handlePointClick}
+        labelsData={POINTS}
+        labelText={(point) => point.name}
+        labelSize={1.2}
+        labelColor={() => "#FFFFFF"}
+        labelDotRadius={0.4}
+        labelAltitude={0.01}
+        labelResolution={2}
         arcsData={ARCS}
         arcColor={(arc) => arc.color}
         arcDashLength={0.4}

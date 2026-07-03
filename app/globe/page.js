@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import InteractiveGlobe from "@/components/InteractiveGlobe";
 import MobileLayout from "@/components/MobileLayout";
 import StickyPageHeader from "@/components/StickyPageHeader";
@@ -10,6 +10,17 @@ const CITIES = ["Tokyo", "Paris", "New York", "Singapore", "Dubai"];
 
 export default function GlobePage() {
   const router = useRouter();
+  const [selectedCities, setSelectedCities] = useState(CITIES);
+
+  const toggleCity = (city) => {
+    setSelectedCities((current) =>
+      current.includes(city)
+        ? current.filter((name) => name !== city)
+        : [...current, city]
+    );
+  };
+
+  const hasSelection = selectedCities.length > 0;
 
   return (
     <MobileLayout activeTab="home" hideNowPlaying>
@@ -28,29 +39,44 @@ export default function GlobePage() {
           <InteractiveGlobe />
         </div>
 
-        <p className="mt-4 text-center text-sm text-white/40">
-          Tap a city to discover its sound
+        <p className="mb-3 mt-4 text-center text-sm text-white/50">
+          Select cities for your world tour
         </p>
 
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
-          {CITIES.map((city) => (
-            <button
-              key={city}
-              type="button"
-              onClick={() => router.push("/hub")}
-              className="rounded-full bg-white/[0.06] px-3 py-1.5 text-[11px] text-white/70"
-            >
-              {city}
-            </button>
-          ))}
+        <div className="flex flex-wrap justify-center gap-2">
+          {CITIES.map((city) => {
+            const isSelected = selectedCities.includes(city);
+
+            return (
+              <button
+                key={city}
+                type="button"
+                onClick={() => toggleCity(city)}
+                className={
+                  isSelected
+                    ? "rounded-full bg-spotify-green px-4 py-2 text-xs font-bold text-black"
+                    : "rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-xs text-white/40"
+                }
+              >
+                {city}
+              </button>
+            );
+          })}
         </div>
 
-        <Link
-          href="/hub"
-          className="mt-5 text-center text-sm font-medium text-spotify-green"
+        <button
+          type="button"
+          onClick={() => hasSelection && router.push("/hub")}
+          disabled={!hasSelection}
+          className={
+            hasSelection
+              ? "btn-spotify mx-4 mt-5 w-[calc(100%-2rem)] rounded-full bg-spotify-green py-3 text-center text-sm font-bold text-black"
+              : "mx-4 mt-5 w-[calc(100%-2rem)] cursor-not-allowed rounded-full bg-white/10 py-3 text-center text-sm font-bold text-white/30"
+          }
         >
-          Or explore all →
-        </Link>
+          Curate My Playlist ({selectedCities.length}{" "}
+          {selectedCities.length === 1 ? "city" : "cities"}) →
+        </button>
       </div>
     </MobileLayout>
   );
