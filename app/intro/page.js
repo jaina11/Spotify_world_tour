@@ -88,11 +88,11 @@ export default function IntroPage() {
             Spotify World Tour
           </p>
           <h1 className="mt-4 max-w-[300px] text-3xl font-black leading-tight text-white">
-            Music from the world&apos;s trends, made for you
+            Explore cultures without the hassle
           </h1>
           <p className="mt-4 max-w-[280px] text-sm leading-relaxed text-spotify-secondary">
-            Connects you to the beats of every culture — to the one you already
-            love.
+            World Tour turns your curiosity into personalized playlists from
+            countries, cultures, and sounds you&apos;ll love.
           </p>
         </div>
 
