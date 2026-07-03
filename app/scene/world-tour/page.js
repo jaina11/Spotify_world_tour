@@ -59,7 +59,7 @@ export default function WorldTourPage() {
   }, []);
 
   return (
-    <MobileLayout activeTab="home">
+    <MobileLayout activeTab="home" hideNowPlaying>
       <StickyPageHeader title="Your World Tour" backHref="/globe" />
 
       <div className="relative -mx-4">

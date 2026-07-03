@@ -163,14 +163,14 @@ export default function ShareWorldTour({ onClose }) {
 
   return (
     <div
-      className="animate-fade-in fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm"
+      className="animate-fade-in fixed inset-0 z-50 flex max-h-screen flex-col items-center justify-center bg-black/80 px-4 py-3 backdrop-blur-sm"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Share world tour"
     >
       <div
-        className="relative w-[340px] overflow-hidden rounded-2xl"
+        className="relative max-h-[90vh] w-[340px] overflow-hidden rounded-2xl font-sans"
         style={{
           background:
             "linear-gradient(180deg, #0D1040 0%, #1A0A3E 15%, #0A3D5F 30%, #1DB954 48%, #0A5C2F 58%, #E8593C 75%, #F0A030 88%, #C04020 100%)",
@@ -224,33 +224,30 @@ export default function ShareWorldTour({ onClose }) {
           ×
         </button>
 
-        <div className="relative z-10 px-6 text-center">
-          <div className="pt-8">
-            <p className="text-[9px] uppercase tracking-[5px] text-white/50">
+        <div className="relative z-10 px-5 text-center">
+          <div className="pt-6">
+            <p className="text-[9px] font-medium uppercase tracking-[5px] text-white/50">
               SPOTIFY WORLD TOUR
             </p>
             <p className="mt-1 text-[10px] tracking-[2px] text-white/35">
               JULY 2026
             </p>
-            <p className="mt-3 text-[8px] tracking-[6px] text-white/15">
+            <p className="mt-2 text-[8px] tracking-[6px] text-white/15">
               · · · · · · · · ·
             </p>
           </div>
 
-          <div className="mt-5">
-            <p
-              className="text-[32px] font-black italic leading-none text-white"
-              style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
-            >
+          <div className="mt-3">
+            <p className="text-[26px] font-black italic leading-none text-white">
               {displayName}&apos;s
             </p>
-            <p className="text-[32px] font-black leading-tight text-white">
+            <p className="text-[26px] font-black leading-tight text-white">
               World Tour
             </p>
           </div>
 
-          <div className="mt-4">
-            <p className="text-xl leading-relaxed text-white">
+          <div className="mt-3">
+            <p className="text-lg leading-relaxed text-white">
               <span>🇯🇵</span>
               <span className="mx-1 text-sm text-white/30">→</span>
               <span>🇫🇷</span>
@@ -261,57 +258,57 @@ export default function ShareWorldTour({ onClose }) {
               <span className="mx-1 text-sm text-white/30">→</span>
               <span>🇦🇪</span>
             </p>
-            <p className="mt-2 text-[11px] text-white/60">
+            <p className="mt-1 text-[11px] text-white/60">
               5 countries. 1 playlist. A monthly journey made for you.
             </p>
           </div>
 
-          <div className="mt-5 rounded-xl border border-white/10 bg-white/[0.08] p-4 backdrop-blur-sm">
+          <div className="mt-3 rounded-xl border border-white/10 bg-white/[0.08] px-3 py-3 backdrop-blur-sm">
             <div className="flex">
               <div className="flex-1 border-r border-white/10 py-1">
                 <GlobeIcon />
-                <p className="mt-1 text-[28px] font-black text-white">5</p>
-                <p className="text-[9px] uppercase tracking-wider text-white/40">
+                <p className="mt-1 text-[24px] font-black text-white">5</p>
+                <p className="text-[9px] font-medium uppercase tracking-wider text-white/40">
                   Countries
                 </p>
               </div>
               <div className="flex-1 border-r border-white/10 py-1">
                 <MusicNoteIcon />
-                <p className="mt-1 text-[28px] font-black text-white">25</p>
-                <p className="text-[9px] uppercase tracking-wider text-white/40">
+                <p className="mt-1 text-[24px] font-black text-white">25</p>
+                <p className="text-[9px] font-medium uppercase tracking-wider text-white/40">
                   Tracks
                 </p>
               </div>
               <div className="flex-1 py-1">
                 <ClockIcon />
-                <p className="mt-1 text-[28px] font-black text-white">1h 32m</p>
-                <p className="text-[9px] uppercase tracking-wider text-white/40">
+                <p className="mt-1 text-[24px] font-black text-white">1h 32m</p>
+                <p className="text-[9px] font-medium uppercase tracking-wider text-white/40">
                   Playtime
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="mt-5 text-left">
+          <div className="mt-3 text-left">
             <div className="flex items-center gap-2">
               <SparkleIcon />
               <p className="text-sm font-bold text-white">Top Discoveries</p>
             </div>
-            <div className="mt-2 space-y-2">
+            <div className="mt-1.5 space-y-1.5">
               {TOP_DISCOVERIES.map((track) => (
                 <div
                   key={track.num}
-                  className="flex items-center gap-3 rounded-lg border border-white/[0.08] bg-white/[0.06] p-2.5 backdrop-blur-sm"
+                  className="flex items-center gap-2.5 rounded-lg border border-white/[0.08] bg-white/[0.06] p-2 backdrop-blur-sm"
                 >
-                  <span className="w-4 text-base font-bold text-spotify-green">
+                  <span className="w-4 text-sm font-bold text-spotify-green">
                     {track.num}
                   </span>
                   <ImageWithFallback
                     src={track.imageUrl}
                     alt={track.name}
-                    className="h-11 w-11 shrink-0 rounded-md object-cover"
+                    className="h-9 w-9 shrink-0 rounded-md object-cover"
                     fallbackGradient="linear-gradient(135deg, #444, #222)"
-                    fallbackClassName="h-11 w-11 shrink-0 rounded-md"
+                    fallbackClassName="h-9 w-9 shrink-0 rounded-md"
                   />
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-bold text-white">
@@ -327,26 +324,26 @@ export default function ShareWorldTour({ onClose }) {
             </div>
           </div>
 
-          <div className="mt-5 text-left">
+          <div className="mt-3 text-left">
             <div className="flex items-center gap-2">
               <CompassIcon />
               <p className="text-sm font-bold text-white">Your journey explored</p>
             </div>
-            <div className="mt-2 flex flex-wrap gap-2">
+            <div className="mt-1.5 flex flex-wrap gap-1.5">
               {GENRE_PILLS.map((genre) => (
                 <span
                   key={genre.label}
-                  className="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.08] px-3 py-1.5"
+                  className="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.08] px-2.5 py-1"
                 >
                   <span
                     className="h-2 w-2 rounded-full"
                     style={{ backgroundColor: genre.dot }}
                   />
-                  <span className="text-[11px] text-white/70">{genre.label}</span>
+                  <span className="text-[10px] text-white/70">{genre.label}</span>
                 </span>
               ))}
             </div>
-            <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-spotify-green/20 bg-white/[0.04] px-3 py-1.5">
+            <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-spotify-green/20 bg-white/[0.04] px-2.5 py-1">
               <svg
                 className="h-3.5 w-3.5"
                 viewBox="0 0 24 24"
@@ -358,7 +355,7 @@ export default function ShareWorldTour({ onClose }) {
                 <circle cx="12" cy="12" r="9" />
                 <path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18" />
               </svg>
-              <span className="text-[11px] text-spotify-green">
+              <span className="text-[10px] text-spotify-green">
                 New language explored
               </span>
             </div>
@@ -366,7 +363,7 @@ export default function ShareWorldTour({ onClose }) {
 
           <button
             type="button"
-            className="mb-6 mt-5 flex w-full items-center rounded-xl border border-[#F0A030]/40 bg-black/30 px-4 py-3.5"
+            className="mb-4 mt-3 flex w-full items-center rounded-xl border border-[#F0A030]/40 bg-black/30 px-4 py-2.5"
           >
             <SpotifyMiniLogo />
             <span className="flex-1 text-sm font-bold text-white">
@@ -377,7 +374,7 @@ export default function ShareWorldTour({ onClose }) {
         </div>
       </div>
 
-      <p className="mt-4 text-center text-[10px] text-white/40">
+      <p className="mt-2 text-center text-[10px] text-white/40">
         Screenshot to share on your story
       </p>
     </div>

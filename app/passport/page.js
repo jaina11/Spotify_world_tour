@@ -116,7 +116,7 @@ export default function PassportPage() {
   const kmDisplay = formatKm(USER_PROFILE.kmTraveled);
 
   return (
-    <MobileLayout activeTab="home">
+    <MobileLayout activeTab="home" hideNowPlaying>
       <StickyPageHeader
         title="Music Passport"
         backHref="/hub"

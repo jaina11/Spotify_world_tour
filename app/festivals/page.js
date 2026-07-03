@@ -59,7 +59,7 @@ export default function FestivalsPage() {
   }, []);
 
   return (
-    <MobileLayout activeTab="home">
+    <MobileLayout activeTab="home" hideNowPlaying>
       <StickyPageHeader
         title="Trending Festivals"
         backHref="/hub"

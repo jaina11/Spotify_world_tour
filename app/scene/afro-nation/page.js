@@ -40,6 +40,7 @@ export default function AfroNationPage() {
       scene={scene}
       sections={SECTIONS}
       backHref="/festivals"
+      hideNowPlaying
       heroLabel="Spotify · Live now · July 3–5, 2026"
       heroDescription="A global showcase for afrobeats, amapiano, R&B, and Black diaspora sounds. Your recent Afrobeats streak says you're already tuned in."
       playlistMetadata="20 songs, 1h 12 min · Next update at 8:30 PM"
