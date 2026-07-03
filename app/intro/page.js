@@ -1,29 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
+import IntroWorldMap from "@/components/IntroWorldMap";
 import MobileLayout from "@/components/MobileLayout";
 import { hasSeenIntro, markIntroSeen } from "@/data/intro";
-
-const IntroWorldMap = dynamic(() => import("@/components/IntroWorldMap"), {
-  ssr: false,
-});
 
 function IntroBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-      <div className="absolute inset-0 bg-black/40" />
-
-      <div className="absolute inset-x-0 top-[6%] h-[56%] w-full">
+      <div className="absolute inset-x-0 top-0 h-[40%] w-full opacity-50">
         <IntroWorldMap />
       </div>
 
       <div
-        className="absolute inset-x-0 bottom-0 h-[55%]"
+        className="absolute inset-x-0 top-0 h-[55%]"
         style={{
           background:
-            "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.88) 100%)",
+            "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.92) 100%)",
+        }}
+      />
+
+      <div
+        className="absolute inset-x-0 bottom-0 h-[45%]"
+        style={{
+          background:
+            "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.95) 100%)",
         }}
       />
     </div>

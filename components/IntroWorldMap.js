@@ -1,154 +1,76 @@
-"use client";
-
-import { useMemo } from "react";
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  useMapContext,
-} from "react-simple-maps";
-import { geoInterpolate } from "d3-geo";
-
-const TOPO_URL =
-  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
-
-const ROUTES = [
-  {
-    id: "route-mumbai-tokyo",
-    from: [72.8777, 19.076],
-    to: [139.6917, 35.6895],
-    stroke: "#1DB954",
-    pathClass: "intro-flight-path",
-    planeDelay: 0,
-    planeDuration: 8,
-    planeClass: "intro-plane intro-plane-1",
-  },
-  {
-    id: "route-london-lagos",
-    from: [-0.1276, 51.5074],
-    to: [3.3792, 6.5244],
-    stroke: "#B3B3B3",
-    pathClass: "intro-flight-path intro-flight-path-delayed",
-    planeDelay: 2,
-    planeDuration: 7,
-    planeClass: "intro-plane intro-plane-2",
-  },
-  {
-    id: "route-nyc-sydney",
-    from: [-74.006, 40.7128],
-    to: [151.2093, -33.8688],
-    stroke: "#1DB954",
-    pathClass: "intro-flight-path intro-flight-path-slow",
-    planeDelay: 4,
-    planeDuration: 9,
-    planeClass: "intro-plane intro-plane-3",
-  },
+const STOPS = [
+  { name: "India", x: 288, y: 92 },
+  { name: "Nigeria", x: 192, y: 106 },
+  { name: "S.Korea", x: 328, y: 77 },
+  { name: "Japan", x: 348, y: 70 },
+  { name: "Mexico", x: 88, y: 84 },
+  { name: "Brazil", x: 128, y: 158 },
 ];
 
-const PLANE_ICON =
-  "M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z";
+const FLIGHT_PATH =
+  "M 288 92 C 248 98 220 102 192 106 C 248 88 290 78 328 77 C 338 74 344 72 348 70 C 280 55 180 62 88 84 C 102 118 115 142 128 158";
 
-function FlightArc({ id, from, to, stroke, className }) {
-  const { path } = useMapContext();
-
-  const d = useMemo(() => {
-    const interpolate = geoInterpolate(from, to);
-    const coordinates = Array.from({ length: 80 }, (_, i) =>
-      interpolate(i / 79)
-    );
-    return path({ type: "LineString", coordinates });
-  }, [from, to, path]);
-
-  return (
-    <path
-      id={id}
-      d={d}
-      fill="none"
-      stroke={stroke}
-      strokeWidth={1.5}
-      strokeDasharray="4 6"
-      strokeLinecap="round"
-      className={className}
-      opacity={0.5}
-    />
-  );
-}
-
-function FlightPlane({ pathId, delay, duration, className = "intro-plane" }) {
-  return (
-    <g className={className} opacity={0.55}>
-      <g transform="translate(-10, -10)">
-        <animateMotion
-          dur={`${duration}s`}
-          begin={`${delay}s`}
-          repeatCount="indefinite"
-          rotate="auto"
-        >
-          <mpath href={`#${pathId}`} />
-        </animateMotion>
-        <path d={PLANE_ICON} fill="white" transform="scale(0.4)" />
-      </g>
-    </g>
-  );
-}
-
-function MapLayers() {
+function WorldMapLayer() {
   return (
     <>
-      <Geographies geography={TOPO_URL}>
-        {({ geographies }) =>
-          geographies.map((geo) => (
-            <Geography
-              key={geo.rsmKey}
-              geography={geo}
-              fill="rgba(29, 185, 84, 0.05)"
-              stroke="rgba(179, 179, 179, 0.18)"
-              strokeWidth={0.35}
-              style={{
-                default: { outline: "none" },
-                hover: { outline: "none" },
-                pressed: { outline: "none" },
-              }}
-            />
-          ))
-        }
-      </Geographies>
-
-      {ROUTES.map((route) => (
-        <FlightArc
-          key={route.id}
-          id={route.id}
-          from={route.from}
-          to={route.to}
-          stroke={route.stroke}
-          className={route.pathClass}
-        />
-      ))}
-
-      {ROUTES.map((route) => (
-        <FlightPlane
-          key={`plane-${route.id}`}
-          pathId={route.id}
-          delay={route.planeDelay}
-          duration={route.planeDuration}
-          className={route.planeClass}
-        />
-      ))}
+      <path
+        d="M 28 35 Q 18 70 22 110 Q 28 155 48 168 Q 72 178 88 155 Q 98 125 92 85 Q 82 48 58 32 Q 42 24 28 35 Z"
+        fill="white"
+        className="opacity-[0.05]"
+      />
+      <path
+        d="M 155 42 Q 148 65 152 95 Q 158 130 168 165 Q 178 185 192 175 Q 205 155 200 120 Q 195 80 188 55 Q 180 38 165 42 Z"
+        fill="white"
+        className="opacity-[0.05]"
+      />
+      <path
+        d="M 210 38 Q 245 32 285 40 Q 325 48 355 55 Q 375 62 382 75 Q 388 90 378 105 Q 360 115 330 108 Q 295 98 265 88 Q 235 78 215 65 Q 200 52 210 38 Z"
+        fill="white"
+        className="opacity-[0.05]"
+      />
+      <path
+        d="M 248 145 Q 275 138 305 142 Q 330 148 342 158 Q 348 168 335 175 Q 318 180 295 175 Q 268 168 252 158 Q 242 150 248 145 Z"
+        fill="white"
+        className="opacity-[0.05]"
+      />
+      <path
+        d="M 118 72 Q 135 68 155 72 Q 172 78 180 92 Q 175 108 158 115 Q 138 120 122 110 Q 110 98 112 82 Q 114 75 118 72 Z"
+        fill="white"
+        className="opacity-[0.05]"
+      />
     </>
   );
 }
 
 export default function IntroWorldMap() {
   return (
-    <ComposableMap
-      projection="geoEqualEarth"
-      projectionConfig={{ scale: 155, center: [10, 5] }}
-      width={800}
-      height={420}
+    <svg
+      viewBox="0 0 400 200"
       className="h-full w-full"
-      style={{ width: "100%", height: "100%" }}
+      aria-hidden="true"
+      preserveAspectRatio="xMidYMid slice"
     >
-      <MapLayers />
-    </ComposableMap>
+      <WorldMapLayer />
+
+      <path
+        d={FLIGHT_PATH}
+        fill="none"
+        stroke="#1DB954"
+        strokeWidth="1"
+        strokeDasharray="6 4"
+        className="opacity-[0.12]"
+      />
+
+      {STOPS.map((stop) => (
+        <circle
+          key={stop.name}
+          cx={stop.x}
+          cy={stop.y}
+          r="2"
+          fill="#1DB954"
+          className="opacity-60"
+        />
+      ))}
+    </svg>
   );
 }
