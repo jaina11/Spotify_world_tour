@@ -3,25 +3,184 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import CardMapTexture from "@/components/CardMapTexture";
 import MobileLayout from "@/components/MobileLayout";
-import PassportBanner from "@/components/PassportBanner";
-import StickyPageHeader, {
-  HEADER_GRID_COLS,
-} from "@/components/StickyPageHeader";
-import {
-  ChevronRightIcon,
-  GlobeIcon,
-  TourWaveIcon,
-} from "@/components/icons";
-import { getExploreCountries } from "@/data/countries";
+import StickyPageHeader from "@/components/StickyPageHeader";
+import { ChevronRightIcon } from "@/components/icons";
 import { hasSeenIntro } from "@/data/intro";
 
-const TOUR_BUCKETS = [
-  "Picked for you",
-  "Trending now",
-  "Hidden gem",
+const WORLD_TOUR_PILLS = ["Updated monthly", "Local hits", "Hidden gems"];
+const FESTIVAL_PILLS = ["Monthly picks", "Cultural sounds", "Trending now"];
+
+const MAP_PINS = [
+  { x: 278, y: 98, label: "India" },
+  { x: 318, y: 78, label: "Korea" },
+  { x: 332, y: 72, label: "Japan" },
+  { x: 192, y: 108, label: "Nigeria" },
+  { x: 128, y: 132, label: "Brazil" },
 ];
+
+function CardArrowButton({ color }) {
+  return (
+    <div
+      className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full"
+      style={{ backgroundColor: color }}
+      aria-hidden="true"
+    >
+      <ChevronRightIcon className="h-5 w-5 text-white" />
+    </div>
+  );
+}
+
+function LabelPills({ labels }) {
+  return (
+    <div className="mt-auto flex flex-wrap gap-3 pt-4">
+      {labels.map((label) => (
+        <span
+          key={label}
+          className="rounded-full bg-white/[0.06] px-2 py-1 text-[9px] text-white/40"
+        >
+          {label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function WorldTourCardBackground() {
+  return (
+    <svg
+      className="pointer-events-none absolute inset-0 h-full w-full"
+      viewBox="0 0 400 192"
+      fill="none"
+      aria-hidden="true"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      <path
+        d="M28 35Q18 70 22 110Q28 155 48 168Q72 178 88 155Q98 125 92 85Q82 48 58 32Q42 24 28 35Z"
+        stroke="white"
+        strokeWidth="0.75"
+        opacity="0.06"
+      />
+      <path
+        d="M155 42Q148 65 152 95Q158 130 168 165Q178 185 192 175Q205 155 200 120Q195 80 188 55Q180 38 165 42Z"
+        stroke="white"
+        strokeWidth="0.75"
+        opacity="0.06"
+      />
+      <path
+        d="M210 38Q245 32 285 40Q325 48 355 55Q375 62 382 75Q388 90 378 105Q360 115 330 108Q295 98 265 88Q235 78 215 65Q200 52 210 38Z"
+        stroke="white"
+        strokeWidth="0.75"
+        opacity="0.06"
+      />
+      <path
+        d="M248 145Q275 138 305 142Q330 148 342 158Q348 168 335 175Q318 180 295 175Q268 168 252 158Q242 150 248 145Z"
+        stroke="white"
+        strokeWidth="0.75"
+        opacity="0.06"
+      />
+
+      {MAP_PINS.map((pin) => (
+        <circle
+          key={pin.label}
+          cx={pin.x}
+          cy={pin.y}
+          r="4"
+          fill="#7B68EE"
+          opacity="0.4"
+        />
+      ))}
+
+      <path
+        d="M278 98 Q298 88 318 78 T332 72"
+        stroke="#7B68EE"
+        strokeWidth="1"
+        opacity="0.2"
+        strokeDasharray="3 3"
+      />
+      <path
+        d="M332 72 Q262 90 192 108"
+        stroke="#7B68EE"
+        strokeWidth="1"
+        opacity="0.2"
+        strokeDasharray="3 3"
+      />
+      <path
+        d="M192 108 Q160 120 128 132"
+        stroke="#7B68EE"
+        strokeWidth="1"
+        opacity="0.2"
+        strokeDasharray="3 3"
+      />
+      <path
+        d="M128 132 Q200 115 278 98"
+        stroke="#7B68EE"
+        strokeWidth="1"
+        opacity="0.2"
+        strokeDasharray="3 3"
+      />
+    </svg>
+  );
+}
+
+function FestivalCardBackground() {
+  const confetti = [
+    { cx: 42, cy: 28, r: 3, o: 0.06 },
+    { cx: 88, cy: 52, r: 2, o: 0.04 },
+    { cx: 156, cy: 36, r: 5, o: 0.08 },
+    { cx: 210, cy: 64, r: 2.5, o: 0.05 },
+    { cx: 268, cy: 42, r: 4, o: 0.07 },
+    { cx: 320, cy: 58, r: 2, o: 0.03 },
+    { cx: 360, cy: 34, r: 6, o: 0.08 },
+    { cx: 118, cy: 118, r: 3, o: 0.05 },
+    { cx: 298, cy: 132, r: 2, o: 0.04 },
+    { cx: 196, cy: 148, r: 4, o: 0.06 },
+  ];
+
+  return (
+    <svg
+      className="pointer-events-none absolute inset-0 h-full w-full"
+      viewBox="0 0 400 192"
+      fill="none"
+      aria-hidden="true"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      {confetti.map((dot, index) => (
+        <circle
+          key={index}
+          cx={dot.cx}
+          cy={dot.cy}
+          r={dot.r}
+          fill="white"
+          opacity={dot.o}
+        />
+      ))}
+
+      <path
+        d="M0 72 Q50 62 100 72 T200 72 T300 72 T400 72"
+        stroke="white"
+        strokeWidth="1"
+        opacity="0.05"
+      />
+      <path
+        d="M0 108 Q60 98 120 108 T240 108 T360 108 T400 108"
+        stroke="white"
+        strokeWidth="1"
+        opacity="0.05"
+      />
+      <path
+        d="M0 142 Q70 132 140 142 T280 142 T400 142"
+        stroke="white"
+        strokeWidth="1"
+        opacity="0.05"
+      />
+
+      <path d="M72 46 l4 8 l-8 0 l4 -8 z" fill="white" opacity="0.08" />
+      <path d="M248 124 l3 6 l-6 0 l3 -6 z" fill="white" opacity="0.08" />
+      <path d="M334 88 l3.5 7 l-7 0 l3.5 -7 z" fill="white" opacity="0.08" />
+    </svg>
+  );
+}
 
 export default function HubPage() {
   const router = useRouter();
@@ -47,125 +206,58 @@ export default function HubPage() {
     <MobileLayout activeTab="home" hideNowPlaying>
       <StickyPageHeader title="World Tour" backHref="/" />
 
-      <div className="relative -mx-4">
-        <div
-          className="absolute inset-x-0 top-0 h-[120px]"
-          style={{
-            background:
-              "linear-gradient(180deg, #2D4A2D 0%, #1A2F1A 30%, #121212 60%, #121212 100%)",
-          }}
-        />
-        <div className={`relative ${HEADER_GRID_COLS} items-start px-4 pb-2 pt-14`}>
-          <div aria-hidden="true" />
-          <h1 className="min-w-0 text-[22px] font-black leading-tight text-white">
-            Where does your music roam?
-          </h1>
-          <div aria-hidden="true" />
+      <div className="px-4 pb-24 pt-14">
+        <h1 className="text-[22px] font-black leading-tight text-white">
+          Your Monthly World Tour
+        </h1>
+
+        <div className="mt-5 space-y-4">
+          <Link href="/hub" className="tap-scale block">
+            <div
+              className="relative flex h-48 flex-col overflow-hidden rounded-xl p-4 ring-1 ring-white/10"
+              style={{
+                background:
+                  "linear-gradient(135deg, #0D1B3E 0%, #1A0A3E 40%, #0A1A2F 100%)",
+              }}
+            >
+              <WorldTourCardBackground />
+              <CardArrowButton color="#7B68EE" />
+
+              <div className="relative z-10 flex h-full max-w-[80%] flex-col pr-12">
+                <h2 className="text-xl font-bold text-white">
+                  Your Monthly World Tour
+                </h2>
+                <p className="mt-2 text-sm text-white/60">
+                  Every month, pick 5 countries and discover a playlist shaped
+                  by your taste and local trends.
+                </p>
+                <LabelPills labels={WORLD_TOUR_PILLS} />
+              </div>
+            </div>
+          </Link>
+
+          <Link href="/hub" className="tap-scale block">
+            <div
+              className="relative flex h-48 flex-col overflow-hidden rounded-xl p-4 ring-1 ring-white/10"
+              style={{
+                background:
+                  "linear-gradient(135deg, #1A3D20 0%, #3D2A0A 50%, #3D1A2A 100%)",
+              }}
+            >
+              <FestivalCardBackground />
+              <CardArrowButton color="#E8593C" />
+
+              <div className="relative z-10 flex h-full max-w-[80%] flex-col pr-12">
+                <h2 className="text-xl font-bold text-white">Trending Festivals</h2>
+                <p className="mt-2 text-sm text-white/60">
+                  Explore this month&apos;s global festivals through music,
+                  culture, and trending sounds.
+                </p>
+                <LabelPills labels={FESTIVAL_PILLS} />
+              </div>
+            </div>
+          </Link>
         </div>
-      </div>
-
-      <PassportBanner className="mb-3 px-4" />
-
-      <div className="flex min-h-[calc(100dvh-15rem)] flex-col gap-3 px-4 pb-4">
-        <Link href="/events" className="tap-scale flex flex-1">
-          <div className="relative flex w-full flex-col overflow-hidden rounded-xl p-5 shadow-[0_8px_24px_rgba(0,0,0,0.35)] ring-1 ring-white/10">
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(135deg, #2D4A2D 0%, #1A3D28 28%, #1A2F1A 48%, #3D2A1A 72%, #121212 100%)",
-              }}
-            />
-            <div
-              className="pointer-events-none absolute -right-8 -top-10 h-36 w-36 rounded-full opacity-80"
-              style={{
-                background:
-                  "radial-gradient(circle, rgba(29,185,84,0.22) 0%, transparent 70%)",
-              }}
-            />
-            <div
-              className="pointer-events-none absolute -bottom-10 left-1/4 h-28 w-28 rounded-full opacity-70"
-              style={{
-                background:
-                  "radial-gradient(circle, rgba(240,160,48,0.12) 0%, transparent 70%)",
-              }}
-            />
-            <CardMapTexture className="pointer-events-none absolute inset-0 h-full w-full opacity-90" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(29,185,84,0.1)_1px,transparent_0)] bg-[length:10px_10px] opacity-40" />
-            <TourWaveIcon className="intro-icon-float pointer-events-none absolute right-3 top-3 h-16 w-16 text-white/25" />
-
-            <div className="relative flex flex-1 flex-col">
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0 flex-1 pr-14">
-                  <h2 className="text-lg font-black text-white">Trending Festivals</h2>
-                  <p className="mt-1 text-sm text-white/70">
-                    Festival playlists from around the world
-                  </p>
-                </div>
-                <ChevronRightIcon className="mt-1 h-5 w-5 shrink-0 text-white/80" />
-              </div>
-
-              <div className="mt-auto flex flex-wrap gap-x-3 gap-y-2 pt-5">
-                {TOUR_BUCKETS.map((label) => (
-                  <span
-                    key={label}
-                    className="flex items-center gap-1.5 text-[10px] font-medium text-white/50"
-                  >
-                    <span className="h-1 w-1 rounded-full bg-spotify-green" />
-                    {label}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/explore" className="tap-scale flex flex-1">
-          <div className="relative flex w-full flex-col overflow-hidden rounded-xl p-5 shadow-[0_8px_24px_rgba(0,0,0,0.35)] ring-1 ring-white/10">
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(135deg, #0A1A2F 0%, #142848 30%, #1A1A3D 52%, #121212 100%)",
-              }}
-            />
-            <div
-              className="pointer-events-none absolute -right-6 -top-8 h-36 w-36 rounded-full opacity-80"
-              style={{
-                background:
-                  "radial-gradient(circle, rgba(123,104,238,0.25) 0%, transparent 70%)",
-              }}
-            />
-            <div
-              className="pointer-events-none absolute -bottom-12 left-0 h-32 w-32 rounded-full opacity-70"
-              style={{
-                background:
-                  "radial-gradient(circle, rgba(59,130,246,0.14) 0%, transparent 70%)",
-              }}
-            />
-            <CardMapTexture className="pointer-events-none absolute inset-0 h-full w-full opacity-90" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(123,104,238,0.1)_1px,transparent_0)] bg-[length:10px_10px] opacity-40" />
-            <GlobeIcon className="intro-globe-spin pointer-events-none absolute right-3 top-3 h-16 w-16 text-white/25" />
-
-            <div className="relative flex flex-1 flex-col">
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0 flex-1 pr-14">
-                  <h2 className="text-lg font-black text-white">
-                    Explore the World
-                  </h2>
-                  <p className="mt-1 text-sm text-white/70">
-                    Pick a country, discover its sound
-                  </p>
-                </div>
-                <ChevronRightIcon className="mt-1 h-5 w-5 shrink-0 text-white/80" />
-              </div>
-
-              <p className="mt-auto pt-5 text-[10px] font-medium uppercase tracking-wider text-white/40">
-                {getExploreCountries().length} countries to start
-              </p>
-            </div>
-          </div>
-        </Link>
       </div>
     </MobileLayout>
   );
