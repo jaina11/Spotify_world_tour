@@ -1,0 +1,451 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "63837f90-119b-4614-a0a2-58fca67d8a08",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo",
+          "mode": "list",
+          "cachedResultName": "spotify-reviews-raw",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "General reviews",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "10a99849-978e-4990-95d6-af9fd6d91bf5",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "VHccG4f9Nxt7NLzl",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = $input.all();\n\nconst reviewText = rows.map((row, index) => {\n  const r = row.json;\n  return `[${index + 1}] Source: ${r.source || ''} | Sentiment: ${r.sentiment_hint || ''} | Rating: ${r.rating || 'N/A'}\nTitle: ${r.title || ''}\nReview: ${r.text || ''}`;\n}).join('\\n\\n');\n\nreturn [{\n  json: {\n    total_reviews: rows.length,\n    review_text: reviewText.slice(0, 15000)\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        656,
+        0
+      ],
+      "id": "92a26e68-83d8-437b-aeb7-1ead74579bbc",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "YOUR_ANTHROPIC_API_KEY"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "JSON",
+        "body": "={{ JSON.stringify({model:\"claude-sonnet-4-6\",max_tokens:2000,messages:[{role:\"user\",content:\"Analyze these Spotify India reviews for the Active Discoverer segment and return ONLY valid JSON with keys: top_frustrations (array of 5), top_satisfactions (array of 5), language_bubble_issues (array of 3), feature_gaps (array of 3), active_discoverer_fit (string with score), pm_recommendation (string). Reviews: \" + $json.review_text}]}) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        864,
+        0
+      ],
+      "id": "d476293d-d44a-4504-8e0c-08775b1c50ba",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo",
+          "mode": "list",
+          "cachedResultName": "spotify-reviews-raw",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1691823010,
+          "mode": "list",
+          "cachedResultName": "Claude_analysis",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo/edit#gid=1691823010"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Source Tab": "General reviews",
+            "Reviews Analyszed": "=={{ $json.usage.input_tokens }}",
+            "Insights": "=={{ \" \" + $json.content[0].text.replace(/^```json\\n?/, '').replace(/\\n?```$/, '').trim() }}",
+            "Anaysis Date": "2026-06-23"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Anaysis Date",
+              "displayName": "Anaysis Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Source Tab",
+              "displayName": "Source Tab",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Reviews Analyszed",
+              "displayName": "Reviews Analyszed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Insights",
+              "displayName": "Insights",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1232,
+        1152
+      ],
+      "id": "16f436e5-0121-4ae4-9bcf-9104cd59cbcd",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "VHccG4f9Nxt7NLzl",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo",
+          "mode": "list",
+          "cachedResultName": "spotify-reviews-raw",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 797005334,
+          "mode": "list",
+          "cachedResultName": "Feature wise reviews",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo/edit#gid=797005334"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        144
+      ],
+      "id": "6f960304-036b-4f4e-82c8-c0ed6aa03a55",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "VHccG4f9Nxt7NLzl",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo",
+          "mode": "list",
+          "cachedResultName": "spotify-reviews-raw",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1362885166,
+          "mode": "list",
+          "cachedResultName": "Compititor ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo/edit#gid=1362885166"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        304
+      ],
+      "id": "9e3c4228-5597-41da-a5e7-ecd90cb107cf",
+      "name": "Get row(s) in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "VHccG4f9Nxt7NLzl",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo",
+          "mode": "list",
+          "cachedResultName": "spotify-reviews-raw",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1062308566,
+          "mode": "list",
+          "cachedResultName": "Scrapped Reviews",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15SqIPgdjA0h_a3RnsxQ9Rj_O1OVpRE30o6h-om8kPpo/edit#gid=1062308566"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        -144
+      ],
+      "id": "e9f2d5ed-23b8-405b-8f89-d0b565c51743",
+      "name": "Get row(s) in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "VHccG4f9Nxt7NLzl",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "numberInputs": 4
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        432,
+        -32
+      ],
+      "id": "a6622ac6-14d2-4ae4-9aaa-5cb34beba359",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "https://docs.google.com/document/d/1FJVUEd4CGClfMyT3uGadomyq2mtb2ht4YQRgRi1xLkM/edit?tab=t.0",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "=={{ $json.content[0].text }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1072,
+        0
+      ],
+      "id": "d132eb89-c678-4417-859e-f23302a40d73",
+      "name": "Update a document",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "2CtZUWQo6qCY6Eil",
+          "name": "Google Docs OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get row(s) in sheet3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get row(s) in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Update a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet3": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a document": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "00f204ad-6f8b-4edf-be2c-8d34ef45fcb7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "adf83dc042d28c157c907392190b5bfb1489ec5fbc53fe7689a490f33de32268"
+  },
+  "nodeGroups": [],
+  "id": "SzykVxGSjQItivEM",
+  "tags": []
+}
